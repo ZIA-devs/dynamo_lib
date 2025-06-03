@@ -5,3 +5,4 @@ from schemas import ClientSchema
 class ClientCrud(BaseCrud[ClientSchema]):
     SK_MARKER = "client#"
     model = ClientSchema
+    
