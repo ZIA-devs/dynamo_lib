@@ -1,4 +1,4 @@
-from core.dynamo import TableName, dynamo_create, dynamo_query, dynamo_update, dynamo_delete
+from core.dynamo import TableName, dynamo_create, dynamo_query, dynamo_update, dynamo_delete, dynamo_scan
 from typing import TypeVar, Generic, Type, Any, Dict, Optional, ClassVar
 from pydantic import BaseModel
 from enum import Enum
@@ -13,11 +13,19 @@ class BaseCrud(Generic[T]):
     SK_MARKER: ClassVar[str] = ""
     model: Type[T]
 
+
     @classmethod
     def get_new_id(cls) -> str:
         timestamp_ms = int(time.time() * 1000)
         random_bits = random.getrandbits(12)
         return f"{timestamp_ms << 12 | random_bits}"
+
+
+    @classmethod
+    def scan(cls, filter_expression: str | None = None) -> list[T]:
+        items = dynamo_scan(table_name=cls.TABLE_NAME, filter_expression=filter_expression)
+        return [cls.model(**item) for item in items if isinstance(item, dict)]
+
 
     @classmethod
     def list(cls, pk: str|int, sk: str|int = '') -> list[T]:
