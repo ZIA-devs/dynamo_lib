@@ -12,4 +12,4 @@ class ReengagementCrud(BaseCrud[ReengagementSchema]):
             "reengagement_message": mensagem,
             "reengagement_wait_time": wait_time
         }
-        return cls.add(pk=phone_id, sk=None, data=reengagement)
+        return cls.add(pk=phone_id, sk="", data=reengagement)

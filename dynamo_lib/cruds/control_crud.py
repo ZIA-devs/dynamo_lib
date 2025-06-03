@@ -15,4 +15,4 @@ class ControlCrud(BaseCrud[ControlSchema]):
             'employee_limit': employee_limit,
             'status': ControlStatus.NEED_META_LOGIN
         }
-        return super().add(pk=company_identification, sk=None, data=new_control)
+        return super().add(pk=company_identification, sk="", data=new_control)
