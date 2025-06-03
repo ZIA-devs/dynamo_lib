@@ -30,7 +30,6 @@ class BaseCrud(Generic[T]):
     @classmethod
     def list(cls, pk: str|int, sk: str|int = '') -> list[T]:
         items = dynamo_query(pk=str(pk), sk=cls.SK_MARKER + str(sk), table_name=cls.TABLE_NAME)
-        print(items)
         return [cls.model(**item) for item in items]
 
 
@@ -42,7 +41,7 @@ class BaseCrud(Generic[T]):
 
     @classmethod
     def add(cls, pk: str|int, sk: Optional[str|int], data:Dict[str, Any]) -> T:
-        sk_text = cls.SK_MARKER + str(sk) if sk else None
+        sk_text = cls.SK_MARKER + str(sk) if sk is not None else None
         if not dynamo_create(pk=str(pk), sk=sk_text, item=data, table_name=cls.TABLE_NAME):
             raise Exception("Error adding item to DynamoDB")
         return cls.model(**data)
