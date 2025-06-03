@@ -26,6 +26,5 @@ setup(
         "typing-inspection==0.4.1",
         "typing_extensions==4.14.0",
         "urllib3==2.4.0",
-        "win32_setctime==1.2.0"
     ],
 )
