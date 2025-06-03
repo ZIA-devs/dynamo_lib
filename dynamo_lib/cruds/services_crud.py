@@ -1,5 +1,5 @@
+from ..schemas.service_schema import ServiceSchema
 from ._base_crud import BaseCrud
-from schemas.service_schema import ServiceSchema
 from typing import Optional
 
 

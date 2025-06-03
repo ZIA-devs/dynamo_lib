@@ -1,5 +1,5 @@
+from ..schemas import AssistantSchema
 from ._base_crud import BaseCrud
-from schemas import AssistantSchema
 
 
 class AssistantCrud(BaseCrud[AssistantSchema]):

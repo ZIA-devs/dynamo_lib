@@ -1,6 +1,6 @@
-from ._base_crud import BaseCrud
+from ..schemas import LogsSchema, ConfigsSchema
 from .reengagement_crud import ReengagementCrud
-from schemas import LogsSchema, ConfigsSchema
+from ._base_crud import BaseCrud
 from typing import Dict, Any
 from datetime import datetime
 import pytz 

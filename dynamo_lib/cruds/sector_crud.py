@@ -1,5 +1,5 @@
+from ..schemas.sector_schema import SectorSchema
 from ._base_crud import BaseCrud
-from schemas.sector_schema import SectorSchema
 
 
 class SectorCrud(BaseCrud[SectorSchema]):

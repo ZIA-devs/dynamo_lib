@@ -1,4 +1,4 @@
-from core.enums import SectorStatus
+from ..core.enums import SectorStatus
 from pydantic import BaseModel, Field
 
 

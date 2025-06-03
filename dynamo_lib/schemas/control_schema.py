@@ -1,4 +1,4 @@
-from core.enums import ControlStatus, EmpresaPlan 
+from ..core.enums import ControlStatus, EmpresaPlan 
 from pydantic import BaseModel, Field
 
 

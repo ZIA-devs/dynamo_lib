@@ -1,5 +1,5 @@
+from ..schemas import EmployeeSchema
 from ._base_crud import BaseCrud
-from schemas import EmployeeSchema
 from typing import Optional, Dict, Any
 
 

@@ -1,4 +1,4 @@
-from core.enums import EmpresaPlan
+from ..core.enums import EmpresaPlan
 from pydantic import BaseModel, Field, field_validator
 from typing import Any
 

@@ -1,5 +1,5 @@
+from ..schemas import ConfigsSchema
 from ._base_crud import BaseCrud
-from schemas import ConfigsSchema
 
 
 class ConfigsCrud(BaseCrud[ConfigsSchema]):

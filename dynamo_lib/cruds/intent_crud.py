@@ -1,5 +1,5 @@
+from ..schemas import IntentSchema
 from ._base_crud import BaseCrud
-from schemas import IntentSchema
 
 
 class IntentCrud(BaseCrud[IntentSchema]):

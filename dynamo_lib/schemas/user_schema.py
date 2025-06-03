@@ -1,4 +1,4 @@
-from core.enums import UserStatus
+from ..core.enums import UserStatus
 from pydantic import BaseModel, Field
 
 

@@ -1,5 +1,5 @@
+from ..schemas import ClientSchema
 from ._base_crud import BaseCrud
-from schemas import ClientSchema
 
 
 class ClientCrud(BaseCrud[ClientSchema]):

@@ -1,6 +1,6 @@
+from ..core.enums import EmpresaPlan, ControlStatus
+from ..schemas import ControlSchema
 from ._base_crud import BaseCrud
-from schemas import ControlSchema
-from core.enums import EmpresaPlan, ControlStatus
 
 
 class ControlCrud(BaseCrud[ControlSchema]):

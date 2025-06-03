@@ -1,5 +1,5 @@
+from ..schemas.reengagement_schema import ReengagementSchema
 from ._base_crud import BaseCrud
-from schemas.reengagement_schema import ReengagementSchema
 
 
 class ReengagementCrud(BaseCrud[ReengagementSchema]):

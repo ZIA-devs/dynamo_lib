@@ -1,5 +1,5 @@
+from ..schemas import FormSchema
 from ._base_crud import BaseCrud
-from schemas import FormSchema
 
 
 class FormsCrud(BaseCrud[FormSchema]):

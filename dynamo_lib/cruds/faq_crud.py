@@ -1,5 +1,5 @@
+from ..schemas import FaqSchema
 from ._base_crud import BaseCrud
-from schemas import FaqSchema
 
 
 class FaqCrud(BaseCrud[FaqSchema]):

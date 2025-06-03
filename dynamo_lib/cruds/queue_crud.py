@@ -1,5 +1,5 @@
+from ..schemas import QueueSchema
 from ._base_crud import BaseCrud
-from schemas import QueueSchema
 
 
 class QueueCrud(BaseCrud[QueueSchema]):

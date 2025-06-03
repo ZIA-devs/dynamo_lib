@@ -1,5 +1,5 @@
+from ..schemas import MainContactSchema
 from ._base_crud import BaseCrud
-from schemas import MainContactSchema
 
 
 class MainContactCrud(BaseCrud[MainContactSchema]):

@@ -1,5 +1,5 @@
+from ..schemas import CompanyShiftSchema
 from ._base_crud import BaseCrud
-from schemas import CompanyShiftSchema
 
 
 class CompanyShiftCrud(BaseCrud[CompanyShiftSchema]):

@@ -1,4 +1,4 @@
-from core.dynamo import TableName, dynamo_create, dynamo_query, dynamo_update, dynamo_delete, dynamo_scan
+from ..core.dynamo import TableName, dynamo_create, dynamo_query, dynamo_update, dynamo_delete, dynamo_scan
 from typing import TypeVar, Generic, Type, Any, Dict, Optional, ClassVar
 from pydantic import BaseModel
 from enum import Enum
