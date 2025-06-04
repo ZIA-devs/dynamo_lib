@@ -75,7 +75,7 @@ class CompanyShiftSchema(BaseModel):
                 if inicio.get(i_str) and fim.get(i_str):
                     turno[f'inicio_{turno_prefixo}'] = inicio[i_str]
                     turno[f'fim_{turno_prefixo}'] = fim[i_str]
-            expediente_formatado[i_str] = turno if turno else None
+            expediente_formatado[i_str] = turno or None
         
         return expediente_formatado if any(expediente_formatado.values()) else None
 
