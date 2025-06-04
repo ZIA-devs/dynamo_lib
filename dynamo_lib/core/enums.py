@@ -32,9 +32,16 @@ class EmpresaPlan(int, Enum):
     ASA_EXPIRED = -3
     SCHEDULE_EXPIRED = -2
     BASIC_EXPIRED = -1
-    
+
     BASIC = 0
     SCHEDULE = 1
     ASA = 2
+VALID_EMPRESA_PLAN_VALUES = {item.value for item in EmpresaPlan}
 
-VALID_EMPRESA_PLAN_VALUES = set(item.value for item in EmpresaPlan)
+
+class EmpresaTipo(str, Enum):
+    PADRAO = 'padrao'
+    CLINICA = 'clinica'
+    SALAO = 'salao'
+    CORRETORA = 'corretora'
+VALID_EMPRESA_TIPO_VALUES = {item.value for item in EmpresaTipo}

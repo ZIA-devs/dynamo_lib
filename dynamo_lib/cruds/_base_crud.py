@@ -50,7 +50,7 @@ class BaseCrud(Generic[T]):
         sk_text = cls.SK_MARKER + str(sk) if sk is not None else None
         if cls.debug: logger.info(f"Adding item with pk={pk}, sk={sk_text}, data={data}")
         if not dynamo_create(pk=str(pk), sk=sk_text, item=data, table_name=cls.TABLE_NAME):
-            raise Exception("Error adding item to DynamoDB")
+            raise RuntimeError("Error adding item to DynamoDB")
         return cls.model(**data)
     
 
@@ -61,7 +61,7 @@ class BaseCrud(Generic[T]):
         sk = f'{sk}#{item_id}' if sk else str(item_id)
         if cls.debug: logger.info(f"Adding item with pk={pk}, sk={sk}, data={data}")
         if not dynamo_create(pk=str(pk), sk=cls.SK_MARKER + sk, item=data, table_name=cls.TABLE_NAME):
-            raise Exception("Error adding item to DynamoDB")
+            raise RuntimeError("Error adding item to DynamoDB")
         return cls.model(**data)
 
 

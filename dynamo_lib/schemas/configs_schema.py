@@ -1,4 +1,4 @@
-from ..core.enums import EmpresaPlan
+from ..core.enums import EmpresaPlan, EmpresaTipo
 from pydantic import BaseModel, Field, field_validator
 from typing import Any, Dict
 import json
@@ -7,7 +7,7 @@ import json
 class ConfigsSchema(BaseModel):
     assistant_id: str = Field(default='', alias='assistant_id', description='ID of the assistant')
     assistant_name: str = Field(default='', alias='assistant_name', description='Name of the assistant')
-    business_type: str = Field(default='', alias='business_type', description='Type of business')
+    business_type: EmpresaTipo = Field(default=EmpresaTipo.PADRAO, alias='business_type', description='Type of business')
     phone_id: str = Field(default='', alias='phone_id', description='ID of the phone')
     company_name: str = Field(default='', alias='company_name', description='Name of the company')
     employee_limit: int = Field(default=99, alias='employee_limit', description='Limit of employees')
