@@ -39,9 +39,9 @@ class LogsCrud(BaseCrud[LogsSchema]):
     def create(cls, company_config: ConfigsSchema, client_phone: str, message_body: str, message_type: str, user_type:int) -> None:
         msgs = cls().get_msg(message_type, message_body, company_config)
         sender = 'user' if user_type == 0 else 'assistant' if user_type == 1 else 'setor'
-        timestamp = datetime.now(timezone).isoformat()
-
+    
         for msg in msgs:
+            timestamp = datetime.now(timezone).isoformat()
             data = {
                 'client_id': client_phone,
                 'message': msg,
