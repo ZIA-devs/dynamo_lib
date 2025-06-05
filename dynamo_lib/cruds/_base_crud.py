@@ -1,4 +1,4 @@
-from ..core.dynamo import TableName, dynamo_create, dynamo_query, dynamo_update, dynamo_delete, dynamo_scan
+from ..core.dynamo import TableName, dynamo_create, dynamo_query, dynamo_update, dynamo_delete, dynamo_scan, dynamo_delete_starting_with
 from typing import TypeVar, Generic, Type, Any, Dict, Optional, ClassVar
 from pydantic import BaseModel
 from enum import Enum
@@ -65,6 +65,12 @@ class BaseCrud(Generic[T]):
         return cls.model(**data)
 
 
+    @classmethod
+    def delete_starting_with(cls, pk: str|int, sk: str|int) -> bool:
+        if cls.debug: logger.info(f"Deleting all items with pk={pk} starting with sk={cls.SK_MARKER + str(sk)}")
+        return dynamo_delete_starting_with(pk, str(sk), cls.TABLE_NAME)
+    
+    
     @classmethod
     def delete(cls, pk: str|int, sk: str|int = "") -> bool:
         if cls.debug: logger.info(f"Deleting item with pk={pk}, sk={cls.SK_MARKER + str(sk)}")

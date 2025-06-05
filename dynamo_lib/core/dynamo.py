@@ -87,12 +87,12 @@ def dynamo_query(pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Option
 @log_exceptions
 def dynamo_create(pk:Any, item:Dict[str, Any], table_name:TableName = DEFAULT_TABLE_NAME, sk:Optional[str]=None) -> bool:
     key = _get_table_keys(table_name, pk, sk)
-    item.update(key)
+    item |= key
 
     for k, v in item.items():
         if isinstance(v, float):
             item[k] = Decimal(str(v))
-    
+
     table = dynamodb.Table(table_name)
     table.put_item(Item=item)
     return True
@@ -105,9 +105,9 @@ def dynamo_update(pk:Any, update_values:Dict[str, Any], table_name:TableName = D
     for k, v in update_values.items():
         if isinstance(v, float):
             update_values[k] = Decimal(str(v))
-    
-    update_expr = "SET " + ", ".join([f"#{k}=:{k}" for k in update_values.keys()])
-    expr_attr_names = {f"#{k}": k for k in update_values.keys()}
+
+    update_expr = "SET " + ", ".join([f"#{k}=:{k}" for k in update_values])
+    expr_attr_names = {f"#{k}": k for k in update_values}
     expr_attr_values = {f":{k}": v for k, v in update_values.items()}
 
     table = dynamodb.Table(table_name)
@@ -119,6 +119,19 @@ def dynamo_update(pk:Any, update_values:Dict[str, Any], table_name:TableName = D
     )
     return True  
 
+@log_exceptions
+def dynamo_delete_starting_with(pk: Any, sk: str, table_name: TableName = DEFAULT_TABLE_NAME) -> bool:
+    table_sk = table_keys[table_name]['sk']
+    items = dynamo_query(pk=pk, sk=sk, table_name=table_name)
+    if not items:
+        return False
+    
+    for item in items:
+        sk_value = item.get(table_sk, '')
+        if sk_value.startswith(sk):
+            dynamo_delete(pk=pk, sk=sk_value, table_name=table_name)
+    
+    return True
 
 @log_exceptions
 def dynamo_delete(pk:Any, table_name:TableName = DEFAULT_TABLE_NAME, sk:Optional[str] = None) -> bool:
