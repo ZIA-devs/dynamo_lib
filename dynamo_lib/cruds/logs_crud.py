@@ -26,7 +26,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
                 case 'cliente_interagiu': return "{mensagem de aviso de interação}"
                 case _: return "{mensagem de template}"
 
-        if message_type == 'interactive': return "{interactive}"
+        if message_type in {'interactive', 'interactive_list'}: return "{interactive}"
         return f'{{{message_type}}}=>{message_body}'
 
 
