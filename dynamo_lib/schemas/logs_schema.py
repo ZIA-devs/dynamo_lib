@@ -9,6 +9,7 @@ class LogsSchema(BaseModel):
     sender: str = Field(default='', alias='sender', description='Sender of the message in the log entry')
     type: str = Field(default='', alias='type', description='Type of the message in the log entry')
     time: str = Field(default='', alias='time', description='Timestamp of the log entry')
+    ttl:int = Field(default=0, alias='ttl', description='Time to live for the log entry')
 
     @field_validator('client_id', mode='after')
     @classmethod

@@ -2,7 +2,7 @@ from ..schemas import LogsSchema, ConfigsSchema
 from .reengagement_crud import ReengagementCrud
 from ._base_crud import BaseCrud
 from typing import Dict, Any
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz 
 
 
@@ -36,12 +36,16 @@ class LogsCrud(BaseCrud[LogsSchema]):
         sender = 'user' if user_type == 0 else 'assistant' if user_type == 1 else 'setor'
         timestamp = datetime.now(timezone).isoformat()
 
+        #TTL to 3 months
+        ttl = int((datetime.now(timezone) + timedelta(days=90) - datetime(1970, 1, 1)).total_seconds())
+
         data = {
             'client_id': client_phone,
             'message': msg,
             'sender': sender,
             'type': message_type,
-            'time': timestamp
+            'time': timestamp,
+            'ttl': ttl,
         }  
         log_sk = f"{client_phone}#{timestamp}"
         return super().add(pk=company_config.phone_id, sk=log_sk, data=data)
