@@ -30,7 +30,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
         if message_type in {'interactive', 'interactive_list'}: return ["{interactive}"]
 
         if message_type == 'contacts':
-            return [f"{{contact}}=>{json.dumps(contact)}" for contact in json.loads(message_body)]
+            return [f"{{contacts}}=>{json.dumps(contact)}" for contact in json.loads(message_body)]
         
         return [f'{{{message_type}}}=>{message_body}']
 
