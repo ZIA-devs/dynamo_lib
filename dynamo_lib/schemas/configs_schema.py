@@ -18,6 +18,7 @@ class ConfigsSchema(BaseModel):
     token_openai: str = Field(default='', alias='token_openai', description='OpenAI token')
     token_wpp: str = Field(default='', alias='token_wpp', description='WhatsApp token')
     waba_id: str = Field(default='', alias='waba_id', description='WhatsApp Business Account ID')
+    sector_timeout: int = Field(default=3600, alias='sector_timeout', description='Timeout for sector in seconds')
 
     @field_validator('phone_id', mode='before')
     @classmethod
