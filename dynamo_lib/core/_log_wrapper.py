@@ -12,7 +12,7 @@ def default_return_for_type(typ: Any) -> Any:
     if origin is str: return ''
     if origin is int: return 0
     if origin is float: return 0.0
-    return typ() if callable(typ) else None
+    return None
 
 
 P = ParamSpec("P"); R = TypeVar("R")
