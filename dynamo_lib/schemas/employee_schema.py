@@ -14,4 +14,6 @@ class EmployeeSchema(CompanyShiftSchema):
     @field_validator('token_google_calendar', mode='before')
     @classmethod
     def convert_token_google_calendar_to_dict(cls, v: str|Dict[str, Any]) -> Dict[str, Any]: 
+        if not v:
+            return {}
         return json.loads(v) if isinstance(v, str) else v
