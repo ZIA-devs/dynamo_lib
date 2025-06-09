@@ -4,7 +4,7 @@ from typing import Callable, Any, TypeVar, ParamSpec, get_type_hints
 
 
 def default_return_for_type(typ: Any) -> Any:
-    origin = getattr(typ, '__origin__', typ)Add commentMore actions
+    origin = getattr(typ, '__origin__', typ)
     if typ is None or typ is type(None): return None
     if origin is bool: return False
     if origin is list: return []
