@@ -10,7 +10,8 @@ class ClientCrud(BaseCrud[ClientSchema]):
     def create(cls, phone_id: str, name: str, client_id: str|int, last_message:str="") -> ClientSchema:
         client_data = {
             'client_name': name,
-            'client_last_message': last_message
+            'client_last_message': last_message,
+            'client_phone': client_id
         }
         return super().add(phone_id, client_id, client_data)
     
