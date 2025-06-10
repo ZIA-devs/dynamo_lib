@@ -23,7 +23,7 @@ class ClientStatus(int, Enum):
 
 class SectorStatus(int, Enum):
     IDLE = 0
-    WITH_CLIENT= 1
+    WITH_CLIENT = 1
     ON_BOT = 2
 
 
@@ -36,12 +36,27 @@ class EmpresaPlan(int, Enum):
     BASIC = 0
     SCHEDULE = 1
     ASA = 2
+
+
 VALID_EMPRESA_PLAN_VALUES = {item.value for item in EmpresaPlan}
 
 
 class EmpresaTipo(str, Enum):
-    PADRAO = 'padrao'
-    CLINICA = 'clinica'
-    SALAO = 'salao'
-    CORRETORA = 'corretora'
+    PADRAO = "padrao"
+    CLINICA = "clinica"
+    SALAO = "salao"
+    CORRETORA = "corretora"
+
+
 VALID_EMPRESA_TIPO_VALUES = {item.value for item in EmpresaTipo}
+
+
+class SendOffHeaderType(str, Enum):
+    NONE = "none"
+    TEXT = "text"
+    IMAGE = "image"
+    VIDEO = "video"
+    DOCUMENT = "document"
+
+
+VALID_SEND_OFF_HEADER_TYPE_VALUES = {item.value for item in SendOffHeaderType}

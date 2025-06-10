@@ -1,6 +1,7 @@
 from ..schemas import SendOffSchema
+from ..core.enums import SendOffHeaderType
 from ._base_crud import BaseCrud
-from typing import Optional, Dict, Any
+from typing import List, Dict, Any, Optional
 
 
 class SendOffCrud(BaseCrud[SendOffSchema]):
@@ -13,31 +14,26 @@ class SendOffCrud(BaseCrud[SendOffSchema]):
         phone_id: str,
         id: int,
         name: str,
-        language: str,
-        category: str,
-        body_text: str,
-        header_image: str = "",
-        header_text: str = "",
-        var_examples: Optional[Dict[str, Any]] = None,
-        parameter_format: str = "NAMED",
+        body: str,
+        header_type: SendOffHeaderType = SendOffHeaderType.NONE,
+        header: str = "",
+        footer: str = "",
+        buttons: Optional[List[Dict[str, Any]]] = None,
     ) -> SendOffSchema:
 
         data: Dict[str, Any] = {
             "send_off_id": id,
             "send_off_name": name,
-            "send_off_language": language,
-            "send_off_category": category,
-            "send_off_body_text": body_text,
+            "send_off_body": body,
         }
 
-        if header_image:
-            data["send_off_header_image"] = header_image
+        if header_type != SendOffHeaderType.NONE:
+            data["send_off_header"] = header
 
-        if header_text:
-            data["send_off_header_text"] = header_text
+        if footer:
+            data["send_off_footer"] = footer
 
-        if var_examples:
-            data["send_off_var_examples"] = var_examples
-            data["send_off_parameter_format"] = parameter_format
+        if buttons:
+            data["send_off_buttons"] = buttons
 
         return cls.add(pk=phone_id, sk=f"{cls.SK_MARKER}{id}", data=data)
