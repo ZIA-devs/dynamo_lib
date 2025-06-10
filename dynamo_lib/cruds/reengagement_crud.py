@@ -1,4 +1,4 @@
-from ..schemas.reengagement_schema import ReengagementSchema
+from ..schemas import ReengagementSchema
 from ._base_crud import BaseCrud
 
 

@@ -15,6 +15,7 @@ from .reengagement_schema import ReengagementSchema
 from .sector_schema import SectorSchema
 from .service_schema import ServiceSchema
 from .user_schema import UserSchema
+from .send_off_schema import SendOffSchema
 
 __all__ = [
     "AssistantSchema",
@@ -33,4 +34,5 @@ __all__ = [
     "SectorSchema",
     "ServiceSchema",
     "UserSchema",
+    "SendOffSchema",
 ]
