@@ -1,5 +1,5 @@
 from ..schemas import SendOffSchema
-from ..core.enums import SendOffHeaderType
+from ..core.enums import MessageTemplateHeaderType
 from ._base_crud import BaseCrud
 from typing import List, Dict, Any, Optional
 
@@ -17,7 +17,7 @@ class SendOffCrud(BaseCrud[SendOffSchema]):
         language: str,
         category: str,
         body: str,
-        header_type: SendOffHeaderType = SendOffHeaderType.NONE,
+        header_type: MessageTemplateHeaderType = MessageTemplateHeaderType.NONE,
         header: str = "",
         footer: str = "",
         buttons: Optional[List[Dict[str, Any]]] = None,
@@ -33,7 +33,7 @@ class SendOffCrud(BaseCrud[SendOffSchema]):
             "send_off_body": body,
         }
 
-        if header_type != SendOffHeaderType.NONE and header:
+        if header_type != MessageTemplateHeaderType.NONE and header:
             data["send_off_header"] = header
 
         if footer:

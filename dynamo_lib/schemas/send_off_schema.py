@@ -1,4 +1,4 @@
-from ..core.enums import SendOffHeaderType
+from ..core.enums import MessageTemplateHeaderType
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any, Optional
 
@@ -30,8 +30,8 @@ class SendOffSchema(BaseModel):
         description="Body of the send_off template",
     )
 
-    header_type: SendOffHeaderType = Field(
-        default=SendOffHeaderType.NONE,
+    header_type: MessageTemplateHeaderType = Field(
+        default=MessageTemplateHeaderType.NONE,
         alias="send_off_header_type",
         description="Header type of the send_off template",
     )
