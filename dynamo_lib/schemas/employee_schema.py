@@ -7,7 +7,7 @@ import json
 class EmployeeSchema(CompanyShiftSchema):
     _update_intervals = False
 
-    token_google_calendar: dict[str, Any] = Field(
+    token_google_calendar: Dict[str, Any] = Field(
         default_factory=dict,
         alias="token_google_calendar",
         description="Calendar token for the employee",

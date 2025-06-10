@@ -29,13 +29,13 @@ class CompanyShiftSchema(BaseModel):
         description="Whether the company has an afternoon shift",
     )
 
-    start_afternoon: dict[str, str] = Field(
+    start_afternoon: Dict[str, str] = Field(
         default_factory=dict,
         alias=f"shift_start_afternoon",
         description="Start time of the afternoon shift",
     )
 
-    end_afternoon: dict[str, str] = Field(
+    end_afternoon: Dict[str, str] = Field(
         default_factory=dict,
         alias=f"shift_end_afternoon",
         description="End time of the afternoon shift",
@@ -47,13 +47,13 @@ class CompanyShiftSchema(BaseModel):
         description="Whether the company has a night shift",
     )
 
-    start_night: dict[str, str] = Field(
+    start_night: Dict[str, str] = Field(
         default_factory=dict,
         alias=f"shift_start_night",
         description="Start time of the night shift",
     )
 
-    end_night: dict[str, str] = Field(
+    end_night: Dict[str, str] = Field(
         default_factory=dict,
         alias=f"shift_end_night",
         description="End time of the night shift",
@@ -62,12 +62,12 @@ class CompanyShiftSchema(BaseModel):
     def model_post_init(self, __context: Any) -> None:
         self.process_intervals()
 
-    def clean_none(self, att: dict[str, Any]) -> None:
+    def clean_none(self, att: Dict[str, Any]) -> None:
         keys_to_remove = [key for key, value in att.items() if value is None]
         for key in keys_to_remove:
             del att[key]
 
-    def remove_keys_unique(self, att_1: dict[str, Any], att_2: dict[str, Any]) -> None:
+    def remove_keys_unique(self, att_1: Dict[str, Any], att_2: Dict[str, Any]) -> None:
         shared_keys = set(att_1) & set(att_2)
         att_1_keys_to_remove = set(att_1) - shared_keys
         att_2_keys_to_remove = set(att_2) - shared_keys
