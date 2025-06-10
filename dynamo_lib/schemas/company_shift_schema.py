@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import Dict, Optional, Any
+from typing import Dict, Optional, Any, Dict
 
 
 class CompanyShiftSchema(BaseModel):
@@ -11,13 +11,13 @@ class CompanyShiftSchema(BaseModel):
         description="Whether the company has a morning shift",
     )
 
-    start_morning: dict[str, str] = Field(
+    start_morning: Dict[str, str] = Field(
         default_factory=dict,
         alias=f"shift_start_morning",
         description="Start time of the morning shift",
     )
 
-    end_morning: dict[str, str] = Field(
+    end_morning: Dict[str, str] = Field(
         default_factory=dict,
         alias=f"shift_end_morning",
         description="End time of the morning shift",
