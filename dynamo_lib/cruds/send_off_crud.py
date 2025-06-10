@@ -3,7 +3,7 @@ from ._base_crud import BaseCrud
 from typing import Optional, Dict, Any
 
 
-class SectorCrud(BaseCrud[SendOffSchema]):
+class SendOffCrud(BaseCrud[SendOffSchema]):
     SK_MARKER = "send_off#"
     model = SendOffSchema
 
