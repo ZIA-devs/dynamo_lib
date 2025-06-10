@@ -51,12 +51,14 @@ class EmpresaTipo(str, Enum):
 VALID_EMPRESA_TIPO_VALUES = {item.value for item in EmpresaTipo}
 
 
-class SendOffHeaderType(str, Enum):
+class MessageTemplateHeaderType(str, Enum):
     NONE = "none"
-    TEXT = "text"
-    IMAGE = "image"
-    VIDEO = "video"
-    DOCUMENT = "document"
+    TEXT = "TEXT"
+    IMAGE = "IMAGE"
+    VIDEO = "VIDEO"
+    DOCUMENT = "DOCUMENT"
 
 
-VALID_SEND_OFF_HEADER_TYPE_VALUES = {item.value for item in SendOffHeaderType}
+VALID_MESSAGE_TEMPLATE_HEADER_TYPE_VALUES = {
+    item.value for item in MessageTemplateHeaderType
+}

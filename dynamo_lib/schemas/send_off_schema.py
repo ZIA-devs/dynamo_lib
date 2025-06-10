@@ -1,6 +1,6 @@
 from ..core.enums import SendOffHeaderType
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 
 class SendOffSchema(BaseModel):
@@ -25,6 +25,11 @@ class SendOffSchema(BaseModel):
         description="Category of the send_off template",
     )
 
+    body: str = Field(
+        alias="send_off_body",
+        description="Body of the send_off template",
+    )
+
     header_type: SendOffHeaderType = Field(
         default=SendOffHeaderType.NONE,
         alias="send_off_header_type",
@@ -37,11 +42,6 @@ class SendOffSchema(BaseModel):
         description="Header of the send_off template",
     )
 
-    body: str = Field(
-        alias="send_off_body",
-        description="Body of the send_off template",
-    )
-
     footer: str = Field(
         default="",
         alias="send_off_footer",
@@ -52,4 +52,16 @@ class SendOffSchema(BaseModel):
         default_factory=list,
         alias="send_off_buttons",
         description="Buttons of the send_off template",
+    )
+
+    var_examples: Optional[Dict[str, Any]] = Field(
+        default=None,
+        alias="send_off_var_examples",
+        description="Examples of the send_off template",
+    )
+
+    parameter_format: str = Field(
+        default="NAMED",
+        alias="send_off_parameter_format",
+        description="Parameter format of the send_off template",
     )
