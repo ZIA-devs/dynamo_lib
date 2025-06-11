@@ -47,4 +47,4 @@ class SendOffCrud(BaseCrud[SendOffSchema]):
             data["send_off_var_examples"] = var_examples
             data["send_off_parameter_format"] = parameter_format
 
-        return cls.add(pk=phone_id, sk=f"{cls.SK_MARKER}{id}", data=data)
+        return cls.add(pk=phone_id, sk=id, data=data)
