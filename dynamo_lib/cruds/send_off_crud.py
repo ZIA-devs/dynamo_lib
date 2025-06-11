@@ -34,6 +34,7 @@ class SendOffCrud(BaseCrud[SendOffSchema]):
         }
 
         if header_type != MessageTemplateHeaderType.NONE and header:
+            data["send_off_header_type"] = header_type.value
             data["send_off_header"] = header
 
         if footer:
