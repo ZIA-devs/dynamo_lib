@@ -15,7 +15,7 @@ class SendOffSchema(BaseModel):
 
     language: str = Field(
         default="pt_BR",
-        alias="send_off_message",
+        alias="send_off_language",
         description="Language of the send_off template",
     )
 
