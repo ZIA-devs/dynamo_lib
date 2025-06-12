@@ -65,3 +65,9 @@ class SendOffSchema(BaseModel):
         alias="send_off_parameter_format",
         description="Parameter format of the send_off template",
     )
+
+    edit_timestamp: int = Field(
+        default=0,
+        alias="send_off_edit_timestamp",
+        description="Timestamp of the last edit of the send_off template",
+    )
