@@ -3,7 +3,7 @@ from ._base_crud import BaseCrud
 from typing import Dict, Any
 
 
-class SendOffCrud(BaseCrud[TagSchema]):
+class TagCrud(BaseCrud[TagSchema]):
     SK_MARKER = "tag#"
     model = TagSchema
 

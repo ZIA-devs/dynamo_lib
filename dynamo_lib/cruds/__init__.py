@@ -15,6 +15,7 @@ from .sector_crud import SectorCrud
 from .services_crud import ServicesCrud
 from .users_crud import UsersCrud
 from .send_off_crud import SendOffCrud
+from .tag_crud import TagCrud
 
 __all__ = [
     "AssistantCrud",
@@ -34,4 +35,5 @@ __all__ = [
     "ServicesCrud",
     "UsersCrud",
     "SendOffCrud",
+    "TagCrud",
 ]
