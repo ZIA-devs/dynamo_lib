@@ -9,13 +9,10 @@ class ServicesCrud(BaseCrud[ServiceSchema]):
 
     @classmethod
     def get_by_name(cls, phone_id: str, name: str) -> Optional[ServiceSchema]:
-        services = cls.list(phone_id)
-        if not services:
+        if services := cls.list(phone_id):
+            return next((service for service in services if service.name == name), None)
+        else:
             return None
-        for service in services:
-            if service.name == name:
-                return service
-        return None
 
     @classmethod
     def create(
