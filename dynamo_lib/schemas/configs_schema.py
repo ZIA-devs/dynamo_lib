@@ -63,6 +63,10 @@ class ConfigsSchema(BaseModel):
         description="Timeout for sector in seconds",
     )
 
+    beta_tester: bool = Field(
+        default=False, alias="beta_tester", description="Is a beta tester"
+    )
+
     @field_validator("phone_id", mode="before")
     @classmethod
     def convert_phone_id_to_str(cls, v: int | str) -> str:
