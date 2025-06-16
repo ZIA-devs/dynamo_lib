@@ -8,12 +8,18 @@ class ClientCrud(BaseCrud[ClientSchema]):
 
     @classmethod
     def create(
-        cls, phone_id: str, name: str, client_id: str | int, last_msg: str = ""
+        cls,
+        phone_id: str,
+        name: str,
+        client_id: str | int,
+        last_msg: str = "",
+        last_msg_datetime: str = "",
     ) -> ClientSchema:
 
         client_data = {
             "client_name": name,
             "client_last_msg": last_msg,
+            "client_last_msg_datetime": last_msg_datetime,
             "client_phone": client_id,
         }
         return super().add(phone_id, client_id, client_data)
