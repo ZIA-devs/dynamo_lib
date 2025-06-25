@@ -44,9 +44,10 @@ class LogsCrud(BaseCrud[LogsSchema]):
             return ["{interactive}"]
 
         if message_type == "contacts":
-            return [
-                f"{{contacts}}=>{dumps(contact)}" for contact in loads(message_body)
-            ]
+            message_body = (
+                loads(message_body) if isinstance(message_body, str) else message_body
+            )
+            return [f"{{contacts}}=>{dumps(contact)}" for contact in message_body]
 
         return [f"{{{message_type}}}=>{message_body}"]
 
