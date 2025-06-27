@@ -19,6 +19,8 @@ class ConfigsSchema(BaseModel):
         description="Type of business",
     )
 
+    email: str = Field(default="", alias="email", description="Email of the company")
+
     company_name: str = Field(
         default="", alias="company_name", description="Name of the company"
     )
