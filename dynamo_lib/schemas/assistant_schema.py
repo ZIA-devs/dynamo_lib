@@ -8,6 +8,12 @@ class AssistantSchema(BaseModel):
         description="Description of the company for the assistant",
     )
 
+    conversation_instruction: str = Field(
+        default="",
+        alias="assistant_conversation_instructions",
+        description="Instructions for the assistant's conversation style",
+    )
+
     gender: str = Field(
         default="", alias="assistant_gender", description="Gender of the assistant"
     )
