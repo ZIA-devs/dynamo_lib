@@ -46,6 +46,7 @@ class EmpresaTipo(str, Enum):
     CLINICA = "clinica"
     SALAO = "salao"
     CORRETORA = "corretora"
+    GARAGEM = "garagem"
 
 
 VALID_EMPRESA_TIPO_VALUES = {item.value for item in EmpresaTipo}
