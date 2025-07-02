@@ -1,4 +1,16 @@
 from pydantic import BaseModel, Field
+from typing import List
+
+
+class ProductsImagesSchema(BaseModel):
+    url: str = Field(
+        default="", alias="image_url", description="URL of the product image"
+    )
+    description: str = Field(
+        default="",
+        alias="image_description",
+        description="Description of the product image",
+    )
 
 
 class ProductsSchema(BaseModel):
@@ -20,8 +32,8 @@ class ProductsSchema(BaseModel):
         default="", alias="product_price", description="Price of the product"
     )
 
-    images: list[str] = Field(
-        default_factory=list,
+    images: List[ProductsImagesSchema] = Field(
+        default_factory=List,
         alias="product_images",
         description="List of image URLs for the product",
     )
