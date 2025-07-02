@@ -17,6 +17,7 @@ from .service_schema import ServiceSchema
 from .user_schema import UserSchema
 from .send_off_schema import SendOffSchema
 from .tag_schema import TagSchema
+from .products_schema import ProductsSchema
 
 __all__ = [
     "AssistantSchema",
@@ -37,4 +38,5 @@ __all__ = [
     "UserSchema",
     "SendOffSchema",
     "TagSchema",
+    "ProductsSchema",
 ]
