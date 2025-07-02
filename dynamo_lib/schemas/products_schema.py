@@ -3,11 +3,8 @@ from typing import List
 
 
 class ProductsImagesSchema(BaseModel):
-    url: str = Field(
-        default="", alias="image_url", description="URL of the product image"
-    )
+    url: str = Field(alias="image_url", description="URL of the product image")
     description: str = Field(
-        default="",
         alias="image_description",
         description="Description of the product image",
     )
