@@ -1,7 +1,7 @@
 from pydantic import BaseModel, Field
 
 
-class ProductSchema(BaseModel):
+class ProductsSchema(BaseModel):
     id: str = Field(
         default="", alias="product_id", description="Unique identifier for the product"
     )
