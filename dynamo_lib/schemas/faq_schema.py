@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field
+from typing import List, Optional
 
 
 class FaqSchema(BaseModel):
@@ -10,4 +11,10 @@ class FaqSchema(BaseModel):
 
     response: str = Field(
         default="", alias="faq_response", description="Response to the FAQ entry"
+    )
+
+    alternative_responses: Optional[List] = Field(
+        default=None,
+        alias="faq_alternative_responses",
+        description="List of alternative responses to the FAQ entry",
     )
