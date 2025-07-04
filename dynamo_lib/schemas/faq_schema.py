@@ -13,8 +13,8 @@ class FaqSchema(BaseModel):
         default="", alias="faq_response", description="Response to the FAQ entry"
     )
 
-    alternative_responses: Optional[List] = Field(
+    alternative_questions: Optional[List] = Field(
         default=None,
-        alias="faq_alternative_responses",
-        description="List of alternative responses to the FAQ entry",
+        alias="faq_alternative_questions",
+        description="List of alternative questions to the FAQ entry",
     )
