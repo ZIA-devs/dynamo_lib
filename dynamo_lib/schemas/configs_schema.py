@@ -69,6 +69,10 @@ class ConfigsSchema(BaseModel):
         default=False, alias="beta_tester", description="Is a beta tester"
     )
 
+    has_disparos: bool = Field(
+        default=False, alias="has_disparos", description="Has disparos feature"
+    )
+
     @field_validator("phone_id", mode="before")
     @classmethod
     def convert_phone_id_to_str(cls, v: int | str) -> str:
