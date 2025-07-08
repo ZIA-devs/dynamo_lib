@@ -24,3 +24,13 @@ class ControlSchema(BaseModel):
     status: ControlStatus = Field(
         default=ControlStatus.OKAY, alias="status", description="Company status"
     )
+
+    beta_tester: bool = Field(
+        default=False, alias="beta_tester", description="Is the company a beta tester?"
+    )
+
+    has_send_off: bool = Field(
+        default=False,
+        alias="has_send_off",
+        description="Does the company have send-off feature?",
+    )
