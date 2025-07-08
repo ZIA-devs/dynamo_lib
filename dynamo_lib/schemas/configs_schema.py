@@ -69,8 +69,8 @@ class ConfigsSchema(BaseModel):
         default=False, alias="beta_tester", description="Is a beta tester"
     )
 
-    has_disparos: bool = Field(
-        default=False, alias="has_disparos", description="Has disparos feature"
+    has_send_off: bool = Field(
+        default=False, alias="has_send_off", description="Has send_off feature"
     )
 
     @field_validator("phone_id", mode="before")
