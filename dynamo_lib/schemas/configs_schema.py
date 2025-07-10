@@ -73,6 +73,12 @@ class ConfigsSchema(BaseModel):
         default=False, alias="has_send_off", description="Has send_off feature"
     )
 
+    block_template_creation: bool = Field(
+        default=False,
+        alias="block_template_creation",
+        description="Block template creation",
+    )
+
     @field_validator("phone_id", mode="before")
     @classmethod
     def convert_phone_id_to_str(cls, v: int | str) -> str:
