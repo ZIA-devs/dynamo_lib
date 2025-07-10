@@ -1,6 +1,6 @@
 from ..core.enums import EmpresaPlan, EmpresaTipo
 from pydantic import BaseModel, Field, field_validator
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 import json
 
 
@@ -43,7 +43,7 @@ class ConfigsSchema(BaseModel):
 
     token_asa: str = Field(default="", alias="token_asa", description="ASA token")
 
-    token_google_calendar: Dict[str, Any] = Field(
+    token_google_calendar: Optional[Dict[str, Any]] = Field(
         default_factory=dict,
         alias="token_google_calendar",
         description="Google Calendar token",
