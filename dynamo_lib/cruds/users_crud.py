@@ -1,6 +1,6 @@
 from ..core.dynamo import dynamo_get, dynamo_get_gsi
 from ..schemas.user_schema import UserSchema
-from ..core.enums import UserStatus
+from ..core.enums import UserStatus, UserPermissions
 from ._base_crud import BaseCrud
 from typing import Optional
 
@@ -19,10 +19,7 @@ class UsersCrud(BaseCrud[UserSchema]):
         response = dynamo_get_gsi(
             pk_name="email", pk=email, table_name=cls.TABLE_NAME, gsi_name="email"
         )
-        if response:
-            return UserSchema(**response)
-        else:
-            return None
+        return UserSchema(**response) if response else None
 
     @classmethod
     def get_user_by_username(cls, username: str) -> Optional[UserSchema]:
@@ -43,6 +40,7 @@ class UsersCrud(BaseCrud[UserSchema]):
         cnpj: str,
         username: str,
         password: str,
+        permissions: UserPermissions = UserPermissions.EMPLOYEE,
     ) -> UserSchema:
 
         user_id = cls.get_new_id()
@@ -55,5 +53,6 @@ class UsersCrud(BaseCrud[UserSchema]):
             "password": password,
             "status": UserStatus.ACTIVE,
             "username": username,
+            "permissions": permissions.value,
         }
         return super().add(pk=user_id, sk=None, data=user)
