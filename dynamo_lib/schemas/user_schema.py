@@ -1,4 +1,4 @@
-from ..core.enums import UserStatus
+from ..core.enums import UserStatus, UserPermissions
 from pydantic import BaseModel, Field
 
 
@@ -31,4 +31,10 @@ class UserSchema(BaseModel):
 
     username: str = Field(
         default="", alias="username", description="Username of the user"
+    )
+
+    permissions: UserPermissions = Field(
+        default=UserPermissions.EMPLOYEE,
+        alias="permissions",
+        description="Permissions of the user",
     )

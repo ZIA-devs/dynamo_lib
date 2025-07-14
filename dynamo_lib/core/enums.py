@@ -14,6 +14,11 @@ class UserStatus(int, Enum):
     DELETED = 3
 
 
+class UserPermissions(int, Enum):
+    ADMIN = 0
+    EMPLOYEE = 1
+
+
 class ClientStatus(int, Enum):
     ON_BOT = 0
     ON_QUEUE = 1
