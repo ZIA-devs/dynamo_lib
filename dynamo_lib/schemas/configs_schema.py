@@ -41,6 +41,18 @@ class ConfigsSchema(BaseModel):
         description="Timeout for taking in conversation in seconds",
     )
 
+    take_in_conv_start_warn: bool = Field(
+        default=True,
+        alias="take_in_conv_start_warn",
+        description="Warn when starting to take in conversation",
+    )
+
+    take_in_conv_end_warn: bool = Field(
+        default=True,
+        alias="take_in_conv_end_warn",
+        description="Warn when ending to take in conversation",
+    )
+
     token_asa: str = Field(default="", alias="token_asa", description="ASA token")
 
     token_google_calendar: Optional[Dict[str, Any]] = Field(
@@ -77,10 +89,6 @@ class ConfigsSchema(BaseModel):
         default=False,
         alias="block_template_creation",
         description="Block template creation",
-    )
-
-    hide_is_ia: bool = Field(
-        default=False, alias="hide_is_ia", description="Hide is IA feature"
     )
 
     @field_validator("phone_id", mode="before")
