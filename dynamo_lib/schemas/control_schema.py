@@ -34,7 +34,3 @@ class ControlSchema(BaseModel):
         alias="has_send_off",
         description="Does the company have send-off feature?",
     )
-
-    hide_is_ia: bool = Field(
-        default=False, alias="hide_is_ia", description="Hide is IA feature"
-    )

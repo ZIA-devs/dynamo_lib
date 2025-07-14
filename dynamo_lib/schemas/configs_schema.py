@@ -79,6 +79,10 @@ class ConfigsSchema(BaseModel):
         description="Block template creation",
     )
 
+    hide_is_ia: bool = Field(
+        default=False, alias="hide_is_ia", description="Hide is IA feature"
+    )
+
     @field_validator("phone_id", mode="before")
     @classmethod
     def convert_phone_id_to_str(cls, v: int | str) -> str:
