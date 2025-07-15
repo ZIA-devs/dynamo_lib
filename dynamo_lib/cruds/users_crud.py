@@ -1,4 +1,4 @@
-from ..core.dynamo import dynamo_get, dynamo_get_gsi
+from ..core.dynamo import dynamo_get, dynamo_get_gsi, dynamo_get_gsi_list
 from ..schemas.user_schema import UserSchema
 from ..core.enums import UserStatus, UserPermissions
 from ._base_crud import BaseCrud
@@ -8,6 +8,16 @@ from typing import Optional
 class UsersCrud(BaseCrud[UserSchema]):
     TABLE_NAME = "Users"
     model = UserSchema
+
+    @classmethod
+    def list_users_by_company_name(cls, company_name: str) -> list[UserSchema]:
+        response = dynamo_get_gsi_list(
+            pk_name="company_name",
+            pk=company_name,
+            table_name=cls.TABLE_NAME,
+            gsi_name="company_name",
+        )
+        return [UserSchema(**item) for item in response] if response else []
 
     @classmethod
     def get_user_by_id(cls, user_id: int | str) -> Optional[UserSchema]:
