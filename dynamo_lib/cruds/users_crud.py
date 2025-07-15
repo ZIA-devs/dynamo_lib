@@ -51,12 +51,13 @@ class UsersCrud(BaseCrud[UserSchema]):
         username: str,
         password: str,
         permissions: UserPermissions = UserPermissions.EMPLOYEE,
+        company_id: int = 0,
     ) -> UserSchema:
 
         user_id = cls.get_new_id()
         user = {
             "cnpj": cnpj,
-            "company_id": 0,
+            "company_id": company_id,
             "company_name": company_name,
             "email": email,
             "name": name,
