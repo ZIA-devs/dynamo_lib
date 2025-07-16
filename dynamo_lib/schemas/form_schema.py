@@ -21,3 +21,9 @@ class FormSchema(BaseModel):
         alias="form_timeout",
         description="Timeout for appointments in seconds",
     )
+
+    message: str = Field(
+        default="",
+        alias="form_message",
+        description="Message to be send before the form",
+    )
