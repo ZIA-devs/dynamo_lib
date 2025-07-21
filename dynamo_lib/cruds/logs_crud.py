@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 from pytz import timezone as pytz_timezone
 from json import dumps, loads
 
-from ..supabase.crud import BiLogsCRUD
-from ..supabase.schemas import BiLogsSchema
+from ..supabase_bi.crud import BiLogsCRUD
+from ..supabase_bi.schemas import BiLogsSchema
 
 
 timezone = pytz_timezone("America/Sao_Paulo")
