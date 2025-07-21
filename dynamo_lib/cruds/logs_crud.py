@@ -69,8 +69,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
             "user" if user_type == 0 else "assistant" if user_type == 1 else "setor"
         )
 
-        bi_logs_table = f"{company_config.company_name}_{company_config.phone_id}_logs"
-        logs_crud = BiLogsCRUD(table_name=bi_logs_table)
+        logs_crud = BiLogsCRUD()
 
         for msg in msgs:
             timestamp = datetime.now(timezone).isoformat()
