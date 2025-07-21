@@ -100,6 +100,6 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     sender=sender,
                     appointed=appointed,
                     canceled=canceled,
-                    created_at=datetime.now(timezone).isoformat(),
+                    created_at=timestamp,
                 )
             )
