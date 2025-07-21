@@ -87,7 +87,7 @@ class ConfigsSchema(BaseModel):
 
     has_multiple_msg_warn: bool = Field(
         default=True,
-        alias="has_mutiple_msg_warn",
+        alias="has_multiple_msg_warn",
         description="Warn when multiple messages are sent",
     )
 
