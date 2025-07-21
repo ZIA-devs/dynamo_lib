@@ -69,8 +69,8 @@ class LogsCrud(BaseCrud[LogsSchema]):
             "user" if user_type == 0 else "assistant" if user_type == 1 else "setor"
         )
 
-        # bi_logs_table = f"{company_config.company_name}_{company_config.phone_id}_logs"
-        # logs_crud = BiLogsCRUD(table_name=bi_logs_table)
+        bi_logs_table = f"{company_config.company_name}_{company_config.phone_id}_logs"
+        logs_crud = BiLogsCRUD(table_name=bi_logs_table)
 
         for msg in msgs:
             timestamp = datetime.now(timezone).isoformat()
@@ -87,7 +87,6 @@ class LogsCrud(BaseCrud[LogsSchema]):
             appointed = False
             canceled = False
 
-            '=>{"flow_token":"1752857835.7816174\\u003C->678855738641054:5562998299370:cancelar_agendamento"}'
             if msg.startswith("{interactive - nfm_reply}"):
                 flow_name = msg.split(":")[-1]
                 if "cancelar_agendamento" in flow_name:
@@ -95,12 +94,13 @@ class LogsCrud(BaseCrud[LogsSchema]):
                 elif "agendar" in flow_name or "agendamento" in flow_name:
                     appointed = True
 
-            # logs_crud.insert_log(
-            #     BiLogsSchema(
-            #         client_id=client_phone,
-            #         sender=sender,
-            #         appointed=appointed,
-            #         canceled=canceled,
-            #         created_at=datetime.now(timezone),
-            #     )
-            # )
+            logs_crud.insert_log(
+                BiLogsSchema(
+                    phone_id=int(company_config.phone_id),
+                    client_id=client_phone,
+                    sender=sender,
+                    appointed=appointed,
+                    canceled=canceled,
+                    created_at=datetime.now(timezone).isoformat(),
+                )
+            )
