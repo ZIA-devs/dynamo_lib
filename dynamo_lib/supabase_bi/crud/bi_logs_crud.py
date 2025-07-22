@@ -35,7 +35,7 @@ class BiLogsCRUD:
     ) -> List[BiLogsOutputSchema]:
 
         response = self.client.rpc(
-            "get_logs_by_day",
+            "get_logs_timeseries_by_day",
             {
                 "phone_id": phone_id,
                 "date_start": start.isoformat(),
