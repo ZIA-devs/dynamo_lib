@@ -8,7 +8,7 @@ timezone = pytz_timezone("America/Sao_Paulo")
 
 
 crud = BiLogsCRUD()
-start = datetime.now(timezone) - timedelta(days=7)
-end = datetime.now(timezone)
+start = datetime.strptime("2025-07-01", "%Y-%m-%d")
+end = datetime.strptime("2025-07-22", "%Y-%m-%d")
 
-print(crud.get_logs(678855738641054, start, end))
+print(crud.get_logs(679117678621080, start, end))
