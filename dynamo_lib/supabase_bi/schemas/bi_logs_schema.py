@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from datetime import datetime
+from typing import Optional
 
 
 class BiLogsSchema(BaseModel):
@@ -31,6 +31,7 @@ class BiLogsSchema(BaseModel):
 
 
 class BiLogsOutputSchema(BaseModel):
+    day: Optional[str] = Field(None, alias="day", description="Date of the log entry")
     total: int = Field(..., alias="total", description="Total number of log entries")
     appointed_count: int = Field(
         ..., alias="appointed_count", description="Count of appointed logs"
