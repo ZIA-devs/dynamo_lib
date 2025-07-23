@@ -17,6 +17,7 @@ class UserStatus(int, Enum):
 class UserPermissions(int, Enum):
     ADMIN = 0
     EMPLOYEE = 1
+    ZIA = 2
 
 
 class ClientStatus(int, Enum):
