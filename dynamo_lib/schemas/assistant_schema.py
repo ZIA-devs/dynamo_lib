@@ -31,3 +31,9 @@ class AssistantSchema(BaseModel):
         alias="assistant_use_emojis",
         description="Whether the assistant uses emojis",
     )
+
+    vector_store_id: str = Field(
+        default="",
+        alias="assistant_vector_store_id",
+        description="ID of the vector store associated with the assistant",
+    )
