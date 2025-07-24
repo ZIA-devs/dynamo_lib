@@ -1,6 +1,6 @@
 from ..core.enums import ClientStatus
 from pydantic import BaseModel, Field, field_validator
-from typing import List
+from typing import List, Optional
 
 
 class ClientSchema(BaseModel):
@@ -32,7 +32,7 @@ class ClientSchema(BaseModel):
         description="Status of the client",
     )
 
-    thread: str = Field(
+    thread: Optional[str] = Field(
         default="", alias="client_thread", description="Thread ID of the client"
     )
 
