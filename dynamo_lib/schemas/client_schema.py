@@ -1,5 +1,5 @@
 from ..core.enums import ClientStatus
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from typing import List
 
 
@@ -47,3 +47,8 @@ class ClientSchema(BaseModel):
         alias="client_has_made_appointment",
         description="Indicates if the client has made an appointment",
     )
+
+    @field_validator("thread", mode="before")
+    def validate_thread(cls, value):
+        if not value:
+            return ""
