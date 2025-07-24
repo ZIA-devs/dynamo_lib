@@ -93,7 +93,8 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     canceled = True
                 elif "agendar" in flow_name or "agendamento" in flow_name:
                     appointed = True
-                    
+            
+            tokens = (len(enc.encode(msg)) + (667 if sender == "user" else 0)) if (message_type == "text" or message_type == "audio") else 0
             logs_crud.insert_log(
                 BiLogsSchema(
                     phone_id=int(company_config.phone_id),
@@ -102,6 +103,6 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     appointed=appointed,
                     canceled=canceled,
                     created_at=timestamp,
-                    tokens = len(enc.encode(msg)) + (667 if sender == "user" else 0)
+                    tokens = tokens
                 )
             )
