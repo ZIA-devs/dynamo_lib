@@ -102,6 +102,6 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     appointed=appointed,
                     canceled=canceled,
                     created_at=timestamp,
-                    tokens = len(enc.encode(msg)) + 667
+                    tokens = len(enc.encode(msg)) + (667 if sender == "user" else 0)
                 )
             )
