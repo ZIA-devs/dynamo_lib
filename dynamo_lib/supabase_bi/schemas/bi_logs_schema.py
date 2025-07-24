@@ -28,6 +28,9 @@ class BiLogsSchema(BaseModel):
         alias="created_at",
         description="Timestamp of when the log entry was created",
     )
+    tokens: Optional[int] = Field(
+        None, alias="tokens", description="Number of tokens used in the log entry"
+    )
 
 
 class BiLogsOutputSchema(BaseModel):
@@ -45,4 +48,7 @@ class BiLogsOutputSchema(BaseModel):
     )
     clients_count: int = Field(
         ..., alias="clients_count", description="Count of unique clients in logs"
+    )
+    tokens: Optional[int] = Field(
+        None, alias="tokens", description="Number of tokens used in the log entry"
     )

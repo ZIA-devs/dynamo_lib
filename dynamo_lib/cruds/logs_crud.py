@@ -3,6 +3,7 @@ from .reengagement_crud import ReengagementCrud
 from ._base_crud import BaseCrud
 from typing import Dict, List
 from datetime import datetime, timedelta
+import tiktoken
 from pytz import timezone as pytz_timezone
 from json import dumps, loads
 
@@ -11,7 +12,7 @@ from ..supabase_bi.schemas import BiLogsSchema
 
 
 timezone = pytz_timezone("America/Sao_Paulo")
-
+enc = tiktoken.encoding_for_model("gpt-4o-mini")
 
 class LogsCrud(BaseCrud[LogsSchema]):
     TABLE_NAME = "Logs"
@@ -92,7 +93,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     canceled = True
                 elif "agendar" in flow_name or "agendamento" in flow_name:
                     appointed = True
-
+                    
             logs_crud.insert_log(
                 BiLogsSchema(
                     phone_id=int(company_config.phone_id),
@@ -101,5 +102,6 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     appointed=appointed,
                     canceled=canceled,
                     created_at=timestamp,
+                    tokens = len(enc.encode(msg)) + 667
                 )
             )
