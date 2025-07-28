@@ -55,3 +55,29 @@ class BiLogsCRUD:
         ).execute()
 
         return [BiLogsOutputSchema(**log) for log in response.data]
+
+    def get_all_logs(self, start: datetime, end: datetime) -> List[BiLogsOutputSchema]:
+
+        response = self.client.rpc(
+            "get_total_summary_by_interval",
+            {
+                "date_start": start.isoformat(),
+                "date_end": end.isoformat(),
+            },
+        ).execute()
+
+        return [BiLogsOutputSchema(**log) for log in response.data]
+
+    def get_all_logs_by_day(
+        self, start: datetime, end: datetime
+    ) -> List[BiLogsOutputSchema]:
+
+        response = self.client.rpc(
+            "get_total_by_day",
+            {
+                "date_start": start.isoformat(),
+                "date_end": end.isoformat(),
+            },
+        ).execute()
+
+        return [BiLogsOutputSchema(**log) for log in response.data]
