@@ -49,6 +49,6 @@ class BiLogsOutputSchema(BaseModel):
     clients_count: int = Field(
         ..., alias="clients_count", description="Count of unique clients in logs"
     )
-    tokens: Optional[int] = Field(
+    tokens: Optional[float] = Field(
         None, alias="tokens", description="Number of tokens used in the log entry"
     )

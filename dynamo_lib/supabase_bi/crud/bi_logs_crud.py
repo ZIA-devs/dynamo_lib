@@ -28,7 +28,18 @@ class BiLogsCRUD:
             },
         ).execute()
 
-        return [BiLogsOutputSchema(**log) for log in response.data]
+        token_cost = self.client.rpc(
+            "get_logs_cost",
+            {
+                "phone_id": phone_id,
+                "date_start": start.isoformat(),
+                "date_end": end.isoformat(),
+            },
+        ).execute()
+
+        return [
+            BiLogsOutputSchema(**log, tokens=token_cost.data) for log in response.data
+        ]
 
     def get_logs_timeseries_by_day(
         self, phone_id: str | int, start: datetime, end: datetime
