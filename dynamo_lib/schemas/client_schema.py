@@ -47,3 +47,9 @@ class ClientSchema(BaseModel):
         alias="client_has_made_appointment",
         description="Indicates if the client has made an appointment",
     )
+
+    msg_count: int = Field(
+        default=0,
+        alias="client_msg_count",
+        description="Count of messages sent by the client",
+    )
