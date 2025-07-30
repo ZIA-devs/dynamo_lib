@@ -1,5 +1,6 @@
 from ..schemas import LogsSchema, ConfigsSchema
 from .reengagement_crud import ReengagementCrud
+from .client_crud import ClientCrud
 from ._base_crud import BaseCrud
 from typing import Dict, List
 from datetime import datetime, timedelta
@@ -111,3 +112,13 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     tokens=tokens,
                 )
             )
+
+            if sender == "user":
+                client = ClientCrud.get(
+                    phone_id=company_config.phone_id, client_id=client_phone
+                )
+                ClientCrud.update(
+                    phone_id=company_config.phone_id,
+                    client_id=client_phone,
+                    msg_count=client.msg_count + 1,
+                )
