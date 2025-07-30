@@ -114,9 +114,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
             )
 
             if sender == "user":
-                client = ClientCrud.get(
-                    phone_id=company_config.phone_id, client_id=client_phone
-                )
+                client = ClientCrud.get(company_config.phone_id, client_phone)
                 ClientCrud.update(
                     company_config.phone_id,
                     client_phone,
