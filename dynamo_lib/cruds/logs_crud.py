@@ -118,7 +118,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     phone_id=company_config.phone_id, client_id=client_phone
                 )
                 ClientCrud.update(
-                    phone_id=company_config.phone_id,
-                    client_id=client_phone,
+                    company_config.phone_id,
+                    client_phone,
                     msg_count=client.msg_count + 1,
                 )
