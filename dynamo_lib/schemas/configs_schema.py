@@ -96,6 +96,11 @@ class ConfigsSchema(BaseModel):
         alias="block_template_creation",
         description="Block template creation",
     )
+    hide_assistant_name: bool = Field(
+        default=False,
+        alias="block_template_creation",
+        description="Hide assistant name in conversations",
+    )
 
     @field_validator("phone_id", mode="before")
     @classmethod
