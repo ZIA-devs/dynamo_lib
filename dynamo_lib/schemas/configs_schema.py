@@ -98,7 +98,7 @@ class ConfigsSchema(BaseModel):
     )
     hide_assistant_name: bool = Field(
         default=False,
-        alias="block_template_creation",
+        alias="hide_assistant_name",
         description="Hide assistant name in conversations",
     )
 
