@@ -46,6 +46,10 @@ class LogsCrud(BaseCrud[LogsSchema]):
                 case _:
                     return ["{mensagem de template}"]
 
+        elif message_type == "disparo" and isinstance(message_body, Dict):
+            template_name = message_body.get("name", "")
+            return [f"{{mensagem de disparo}}=>{template_name}"]
+
         if message_type in {"interactive", "interactive_list"}:
             return ["{interactive}"]
 
