@@ -37,3 +37,9 @@ class AssistantSchema(BaseModel):
         alias="assistant_vector_store_id",
         description="ID of the vector store associated with the assistant",
     )
+
+    temperature: float = Field(
+        default=0.5,
+        alias="assistant_temperature",
+        description="Temperature setting for the assistant's responses",
+    )
