@@ -32,7 +32,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
             match template_name:
                 case "lembrete_agendamento":
                     return ["{mensagem de lembrete}"]
-                case name if "agendamento" in name:
+                case name if "concluir_processo" in name or "agendamento" in name:
                     return ["{mensagem do tipo formulario}"]
                 case "reengajamento":
                     reengagement = ReengagementCrud.get(company_config.phone_id)
