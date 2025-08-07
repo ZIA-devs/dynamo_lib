@@ -25,6 +25,7 @@ class ClientStatus(int, Enum):
     ON_QUEUE = 1
     WITH_SECTOR = 2
     TAKEN = 3
+    ON_HOLD = 4
 
 
 class SectorStatus(int, Enum):
