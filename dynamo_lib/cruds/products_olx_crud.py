@@ -2,7 +2,7 @@ from ..schemas import ProductsOlxSchema
 from ._base_crud import BaseCrud
 
 
-class ProductsCrud(BaseCrud[ProductsOlxSchema]):
+class ProductsOlxCrud(BaseCrud[ProductsOlxSchema]):
     SK_MARKER = "product_olx#"
     model = ProductsOlxSchema
 
