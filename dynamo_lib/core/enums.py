@@ -70,3 +70,9 @@ class MessageTemplateHeaderType(str, Enum):
 VALID_MESSAGE_TEMPLATE_HEADER_TYPE_VALUES = {
     item.value for item in MessageTemplateHeaderType
 }
+
+
+class MessageOrigin(int, Enum):
+    META_WPP = 0
+    EVO_WPP = 1
+    OLX = 2
