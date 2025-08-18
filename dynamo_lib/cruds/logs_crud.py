@@ -89,7 +89,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
                 "type": message_type,
                 "time": timestamp,
                 "ttl": int((datetime.now() + timedelta(days=90)).timestamp()),
-                "message_origin": message_origin.value,
+                "message_origin": message_origin,
             }
             log_sk = f"{client_phone}#{timestamp}"
             super().add(pk=company_config.phone_id, sk=log_sk, data=data)
