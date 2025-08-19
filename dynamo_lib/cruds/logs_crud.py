@@ -122,8 +122,18 @@ class LogsCrud(BaseCrud[LogsSchema]):
 
             if sender == "user":
                 client = ClientCrud.get(company_config.phone_id, client_phone)
-                ClientCrud.update(
-                    company_config.phone_id,
-                    client_phone,
-                    msg_count=client.msg_count + 1,
-                )
+
+                update = {
+                    "msg_count": client.msg_count + 1,
+                    "msg_count_wpp": (
+                        client.msg_count_wpp + 1
+                        if message_origin != MessageOrigin.OLX
+                        else client.msg_count_wpp
+                    ),
+                    "msg_count_olx": (
+                        client.msg_count_olx + 1
+                        if message_origin == MessageOrigin.OLX
+                        else client.msg_count_olx
+                    ),
+                }
+                ClientCrud.update(company_config.phone_id, client_phone, **update)

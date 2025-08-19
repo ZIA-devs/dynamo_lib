@@ -53,3 +53,15 @@ class ClientSchema(BaseModel):
         alias="client_msg_count",
         description="Count of messages sent by the client",
     )
+
+    msg_count_wpp: int = Field(
+        default=0,
+        alias="client_msg_count_wpp",
+        description="Count of messages sent by the client",
+    )
+
+    msg_count_olx: int = Field(
+        default=0,
+        alias="client_msg_count_olx",
+        description="Count of messages sent by the client",
+    )
