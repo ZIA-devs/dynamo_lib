@@ -103,6 +103,11 @@ class ConfigsSchema(BaseModel):
         alias="hide_assistant_name",
         description="Hide assistant name in conversations",
     )
+    olx_integration: bool = Field(
+        default=False,
+        alias="olx_integration",
+        description="Enable OLX integration",
+    )
 
     @field_validator("phone_id", mode="before")
     @classmethod
