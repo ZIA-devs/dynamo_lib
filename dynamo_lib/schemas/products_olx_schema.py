@@ -22,6 +22,10 @@ class ProductsOlxSchema(BaseModel):
         default="", alias="product_olx_price", description="Price of the product"
     )
 
+    color: str = Field(
+        default="", alias="product_olx_color", description="Color of the product tag"
+    )
+
     list_id: str = Field(
         default="",
         alias="product_olx_list_id",
