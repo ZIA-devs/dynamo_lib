@@ -23,6 +23,7 @@ class TagCrud(BaseCrud[TagSchema]):
     ) -> TagSchema:
 
         data: Dict[str, Any] = {
+            "tag_id": tag_id,
             "tag_name": name,
             "tag_color": color,
         }
