@@ -46,5 +46,4 @@ class AssistantSchema(BaseModel):
 
     @field_validator("conversation_instruction", mode="before")
     def validate_conversation_instruction(cls, value: str | None) -> str:
-        if not value:
-            return ""
+        return value or ""
