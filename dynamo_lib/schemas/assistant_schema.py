@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class AssistantSchema(BaseModel):
@@ -43,3 +43,8 @@ class AssistantSchema(BaseModel):
         alias="assistant_temperature",
         description="Temperature setting for the assistant's responses",
     )
+
+    @field_validator("conversation_instruction", mode="before")
+    def validate_conversation_instruction(cls, value: str | None) -> str:
+        if not value:
+            return ""
