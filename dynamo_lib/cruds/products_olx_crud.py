@@ -14,6 +14,7 @@ class ProductsOlxCrud(BaseCrud[ProductsOlxSchema]):
         product_price: float,
         product_list_id: str,
         product_description: str = "",
+        product_color: str = "",
     ) -> ProductsOlxSchema:
 
         product_dict = {
@@ -21,6 +22,7 @@ class ProductsOlxCrud(BaseCrud[ProductsOlxSchema]):
             "product_olx_price": product_price,
             "product_olx_description": product_description,
             "product_olx_list_id": product_list_id,
+            "product_olx_color": product_color,
         }
         return super().add_with_id(
             pk=phone_id, data=product_dict, id_key="product_olx_id"
