@@ -108,6 +108,9 @@ class ConfigsSchema(BaseModel):
         alias="olx_integration",
         description="Enable OLX integration",
     )
+    session_id: str = Field(
+        default="", alias="session_id", description="Session ID for the traeffik"
+    )
 
     @field_validator("phone_id", mode="before")
     @classmethod
