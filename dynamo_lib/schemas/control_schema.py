@@ -34,3 +34,7 @@ class ControlSchema(BaseModel):
         alias="has_send_off",
         description="Does the company have send-off feature?",
     )
+
+    is_evolution: bool = Field(
+        default=False, alias="is_evolution", description="Is using the evolution api?"
+    )
