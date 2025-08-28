@@ -38,3 +38,5 @@ class ControlSchema(BaseModel):
     is_evolution: bool = Field(
         default=False, alias="is_evolution", description="Is using the evolution api?"
     )
+
+    session_id: str = Field(default="0", alias="session_id", description="Session ID")
