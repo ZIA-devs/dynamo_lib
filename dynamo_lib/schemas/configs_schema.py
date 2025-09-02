@@ -57,6 +57,10 @@ class ConfigsSchema(BaseModel):
 
     token_olx: str = Field(default="", alias="token_olx", description="OLX token")
 
+    token_uazapi: str = Field(
+        default="", alias="token_uazapi", description="Uazapi token"
+    )
+
     token_google_calendar: Optional[Dict[str, Any]] = Field(
         default_factory=dict,
         alias="token_google_calendar",
