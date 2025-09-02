@@ -39,4 +39,7 @@ class ControlSchema(BaseModel):
         default=False, alias="is_evolution", description="Is using the evolution api?"
     )
 
+    is_uazapi: bool = Field(
+        default=False, alias="is_uazapi", description="Is using the uazapi api?"
+    )
     session_id: str = Field(default="0", alias="session_id", description="Session ID")
