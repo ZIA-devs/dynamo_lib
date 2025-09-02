@@ -76,3 +76,4 @@ class MessageOrigin(int, Enum):
     META_WPP = 0
     EVO_WPP = 1
     OLX = 2
+    UAZAPI = 3
