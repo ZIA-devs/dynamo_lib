@@ -116,6 +116,10 @@ class ConfigsSchema(BaseModel):
         default="0", alias="session_id", description="Session ID for the traeffik"
     )
 
+    is_active: bool = Field(
+        default=True, alias="is_active", description="Is the configuration active"
+    )
+
     @field_validator("phone_id", mode="before")
     @classmethod
     def convert_phone_id_to_str(cls, v: int | str) -> str:
