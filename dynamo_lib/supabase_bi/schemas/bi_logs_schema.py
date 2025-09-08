@@ -72,6 +72,13 @@ class BiLogsOutputSchema(BaseModel):
     tokens: Optional[float] = Field(
         None, alias="tokens", description="Number of tokens used in the log entry"
     )
-    origin: Optional[str] = Field(
-        None, alias="origin", description="Origin of the message in the log entry"
+    meta_wpp: int = Field(
+        0, alias="meta_wpp", description="Count of messages from Meta WhatsApp"
     )
+    evo_wpp: int = Field(
+        0, alias="evo_wpp", description="Count of messages from Evo WhatsApp"
+    )
+    uazapi_wpp: int = Field(
+        0, alias="uazapi_wpp", description="Count of messages from UAZAPI WhatsApp"
+    )
+    olx: int = Field(0, alias="olx", description="Count of messages from OLX")
