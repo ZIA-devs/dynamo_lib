@@ -54,6 +54,10 @@ class BiLogsSchema(BaseModel):
 
 
 class BiLogsOutputSchema(BaseModel):
+    phone_id: Optional[int] = Field(None, alias="phone_id", description="Phone ID")
+    is_total: bool = Field(
+        False, alias="is_total", description="Indicates if the entry is a total summary"
+    )
     day: Optional[str] = Field(None, alias="day", description="Date of the log entry")
     total: int = Field(..., alias="total", description="Total number of log entries")
     appointed_count: int = Field(
