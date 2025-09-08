@@ -47,7 +47,7 @@ class BiLogsSchema(BaseModel):
                 case MessageOrigin.UAZAPI:
                     return "uazapi_wpp"
                 case MessageOrigin.OLX:
-                    return "olx_wpp"
+                    return "olx"
                 case _:
                     return None
         return value
