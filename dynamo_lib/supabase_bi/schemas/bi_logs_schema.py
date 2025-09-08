@@ -1,4 +1,5 @@
-from pydantic import BaseModel, Field
+from core.enums import MessageOrigin
+from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 
 
@@ -6,7 +7,7 @@ class BiLogsSchema(BaseModel):
     id: int = Field(
         default=0, alias="id", description="Unique identifier for the log entry"
     )
-    phonde_id: int = Field(
+    phone_id: int = Field(
         ...,
         alias="phone_id",
         description="Phone ID associated with the log entry",
@@ -31,6 +32,25 @@ class BiLogsSchema(BaseModel):
     tokens: Optional[int] = Field(
         None, alias="tokens", description="Number of tokens used in the log entry"
     )
+    origin: Optional[str] = Field(
+        None, alias="origin", description="Origin of the message in the log entry"
+    )
+
+    @field_validator("origin", mode="before")
+    def validate_origin(cls, value):
+        if not isinstance(value, str):
+            match value:
+                case MessageOrigin.META_WPP:
+                    return "meta_wpp"
+                case MessageOrigin.EVO_WPP:
+                    return "evo_wpp"
+                case MessageOrigin.UAZAPI:
+                    return "uazapi_wpp"
+                case MessageOrigin.OLX:
+                    return "olx_wpp"
+                case _:
+                    return None
+        return value
 
 
 class BiLogsOutputSchema(BaseModel):
@@ -51,4 +71,7 @@ class BiLogsOutputSchema(BaseModel):
     )
     tokens: Optional[float] = Field(
         None, alias="tokens", description="Number of tokens used in the log entry"
+    )
+    origin: Optional[str] = Field(
+        None, alias="origin", description="Origin of the message in the log entry"
     )

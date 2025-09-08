@@ -117,6 +117,7 @@ class LogsCrud(BaseCrud[LogsSchema]):
                     canceled=canceled,
                     created_at=timestamp,
                     tokens=tokens,
+                    origin=message_origin,
                 )
             )
 
