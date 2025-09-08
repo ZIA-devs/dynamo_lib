@@ -1,4 +1,4 @@
-from core.enums import MessageOrigin
+from ...core.enums import MessageOrigin
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional
 
