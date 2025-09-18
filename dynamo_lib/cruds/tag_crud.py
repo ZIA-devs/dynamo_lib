@@ -16,3 +16,15 @@ class TagCrud(BaseCrud[TagSchema]):
         }
 
         return cls.add_with_id(pk=phone_id, data=data, id_key="tag_id")
+
+    @classmethod
+    def create_with_id(
+        cls, phone_id: str, tag_id: str, name: str, color: str
+    ) -> TagSchema:
+
+        data: Dict[str, Any] = {
+            "tag_id": tag_id,
+            "tag_name": name,
+            "tag_color": color,
+        }
+        return cls.add(phone_id, tag_id, data)

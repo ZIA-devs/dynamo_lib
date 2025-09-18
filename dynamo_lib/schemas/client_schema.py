@@ -1,9 +1,10 @@
 from ..core.enums import ClientStatus
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel, Field, field_validator
+from typing import List, Optional
 
 
 class ClientSchema(BaseModel):
+    id: str = Field(alias="company_sk", description="ID of the client")
     last_msg: str = Field(
         default="", alias="client_last_msg", description="Last message from the client"
     )
@@ -32,7 +33,7 @@ class ClientSchema(BaseModel):
         description="Status of the client",
     )
 
-    thread: str = Field(
+    thread: Optional[str] = Field(
         default="", alias="client_thread", description="Thread ID of the client"
     )
 
@@ -47,3 +48,25 @@ class ClientSchema(BaseModel):
         alias="client_has_made_appointment",
         description="Indicates if the client has made an appointment",
     )
+
+    msg_count: int = Field(
+        default=0,
+        alias="client_msg_count",
+        description="Count of messages sent by the client",
+    )
+
+    msg_count_wpp: int = Field(
+        default=0,
+        alias="client_msg_count_wpp",
+        description="Count of messages sent by the client",
+    )
+
+    msg_count_olx: int = Field(
+        default=0,
+        alias="client_msg_count_olx",
+        description="Count of messages sent by the client",
+    )
+
+    @field_validator("id", mode="before")
+    def validate_id(cls, value):
+        return str(value).split("#", 1)[-1]

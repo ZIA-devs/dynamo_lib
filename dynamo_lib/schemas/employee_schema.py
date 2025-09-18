@@ -1,13 +1,13 @@
 from .company_shift_schema import CompanyShiftSchema
 from pydantic import Field, field_validator
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 import json
 
 
 class EmployeeSchema(CompanyShiftSchema):
     _update_intervals = False
 
-    token_google_calendar: Dict[str, Any] = Field(
+    token_google_calendar: Optional[Dict[str, Any]] = Field(
         default_factory=dict,
         alias="token_google_calendar",
         description="Calendar token for the employee",

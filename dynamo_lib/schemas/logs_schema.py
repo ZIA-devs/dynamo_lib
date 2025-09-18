@@ -1,4 +1,5 @@
 from pydantic import BaseModel, Field, field_validator
+from ..core.enums import MessageOrigin
 
 
 class LogsSchema(BaseModel):
@@ -32,6 +33,12 @@ class LogsSchema(BaseModel):
 
     ttl: int = Field(
         default=0, alias="ttl", description="Time to live for the log entry"
+    )
+
+    message_origin: MessageOrigin = Field(
+        default=MessageOrigin.META_WPP,
+        alias="message_origin",
+        description="Origin of the message in the log entry",
     )
 
     @field_validator("client_id", mode="after")

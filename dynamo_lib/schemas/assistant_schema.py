@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 
 
 class AssistantSchema(BaseModel):
@@ -31,3 +31,19 @@ class AssistantSchema(BaseModel):
         alias="assistant_use_emojis",
         description="Whether the assistant uses emojis",
     )
+
+    vector_store_id: str = Field(
+        default="",
+        alias="assistant_vector_store_id",
+        description="ID of the vector store associated with the assistant",
+    )
+
+    temperature: float = Field(
+        default=0.5,
+        alias="assistant_temperature",
+        description="Temperature setting for the assistant's responses",
+    )
+
+    @field_validator("conversation_instruction", mode="before")
+    def validate_conversation_instruction(cls, value: str | None) -> str:
+        return value or ""

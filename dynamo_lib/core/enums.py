@@ -14,12 +14,19 @@ class UserStatus(int, Enum):
     DELETED = 3
 
 
+class UserPermissions(int, Enum):
+    ADMIN = 0
+    EMPLOYEE = 1
+    ZIA = 2
+
+
 class ClientStatus(int, Enum):
     BLOCKED = -1
     ON_BOT = 0
     ON_QUEUE = 1
     WITH_SECTOR = 2
     TAKEN = 3
+    ON_HOLD = 4
 
 
 class SectorStatus(int, Enum):
@@ -64,3 +71,10 @@ class MessageTemplateHeaderType(str, Enum):
 VALID_MESSAGE_TEMPLATE_HEADER_TYPE_VALUES = {
     item.value for item in MessageTemplateHeaderType
 }
+
+
+class MessageOrigin(int, Enum):
+    META_WPP = 0
+    EVO_WPP = 1
+    OLX = 2
+    UAZAPI = 3

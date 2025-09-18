@@ -9,83 +9,107 @@ from decimal import Decimal
 import os
 
 
-DEFAULT_TABLE_NAME = 'Companies'
-AWS_REGION=os.environ.get('AWS_REGION')
-IN_PROD = os.environ.get('IN_PROD') == 'true'
-TableName = Literal['Users', 'Control', 'Companies', 'Logs', 'Intents']
+DEFAULT_TABLE_NAME = "Companies"
+AWS_REGION = os.environ.get("AWS_REGION")
+IN_PROD = os.environ.get("IN_PROD") == "true"
+TableName = Literal["Users", "Control", "Companies", "Logs", "Intents"]
 
-_dynamodb = boto3.resource(
-    'dynamodb',
-    region_name=AWS_REGION
-)
+_dynamodb = boto3.resource("dynamodb", region_name=AWS_REGION)
 
 if TYPE_CHECKING:
     from mypy_boto3_dynamodb.service_resource import DynamoDBServiceResource
+
     dynamodb = cast(DynamoDBServiceResource, _dynamodb)
 else:
     dynamodb = _dynamodb
 
 
-def _get_table_keys(table_name: TableName, pk:Any, sk:Optional[str]) -> Dict[str, Any]:
-    table_pk, type_pk = table_keys[table_name]['pk']
-    table_sk = table_keys[table_name]['sk']
+def _get_table_keys(
+    table_name: TableName, pk: Any, sk: Optional[str]
+) -> Dict[str, Any]:
+    table_pk, type_pk = table_keys[table_name]["pk"]
+    table_sk = table_keys[table_name]["sk"]
     if sk is None and table_sk is not None:
         raise ValueError(f"Table {table_name} precisa de uma chave de ordenação (sk).")
     key = {table_pk: type_pk(pk)}
-    if sk is not None and table_sk is not None: key[table_sk] = sk
+    if sk is not None and table_sk is not None:
+        key[table_sk] = sk
     return key
 
 
 @log_exceptions
-def dynamo_scan(table_name: TableName = DEFAULT_TABLE_NAME, filter_expression: Optional[str] = None) -> list[Dict[str, Any]]:
+def dynamo_scan(
+    table_name: TableName = DEFAULT_TABLE_NAME, filter_expression: Optional[str] = None
+) -> list[Dict[str, Any]]:
     table = dynamodb.Table(table_name)
     scan_kwargs = {}
-    
+
     if filter_expression:
-        scan_kwargs['FilterExpression'] = filter_expression
-    
+        scan_kwargs["FilterExpression"] = filter_expression
+
     response = table.scan(**scan_kwargs)
-    return response.get('Items', [])
+    return response.get("Items", [])
 
 
 @log_exceptions
-def dynamo_get_gsi(pk_name:str, pk:Any, table_name: TableName, gsi_name: str) -> Optional[Dict[str, Any]]:
+def dynamo_get_gsi(
+    pk_name: str, pk: Any, table_name: TableName, gsi_name: str
+) -> Optional[Dict[str, Any]]:
     table = dynamodb.Table(table_name)
     response = table.query(
-        IndexName=gsi_name,
-        KeyConditionExpression=Key(pk_name).eq(pk)
+        IndexName=gsi_name, KeyConditionExpression=Key(pk_name).eq(pk)
     )
-    
-    if 'Items' in response and response['Items']:
-        return response['Items'][0]
+
+    if "Items" in response and response["Items"]:
+        return response["Items"][0]
     return None
-    
-    
+
+
 @log_exceptions
-def dynamo_get(pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Optional[str] = None) -> Optional[Dict[str, Any]]:
+def dynamo_get_gsi_list(
+    pk_name: str, pk: Any, table_name: TableName, gsi_name: str
+) -> list[Dict[str, Any]]:
+    table = dynamodb.Table(table_name)
+    response = table.query(
+        IndexName=gsi_name, KeyConditionExpression=Key(pk_name).eq(pk)
+    )
+
+    return response.get("Items", [])
+
+
+@log_exceptions
+def dynamo_get(
+    pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Optional[str] = None
+) -> Optional[Dict[str, Any]]:
     key = _get_table_keys(table_name, pk, sk)
     table = dynamodb.Table(table_name)
     response = table.get_item(Key=key)
-    return response.get('Item', None)
+    return response.get("Item", None)
 
 
 @log_exceptions
-def dynamo_query(pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Optional[str] = None) -> list[Dict[str, Any]]:
-    table_pk, type_pk = table_keys[table_name]['pk']
-    table_sk = table_keys[table_name]['sk']
+def dynamo_query(
+    pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Optional[str] = None
+) -> list[Dict[str, Any]]:
+    table_pk, type_pk = table_keys[table_name]["pk"]
+    table_sk = table_keys[table_name]["sk"]
 
     key_condition_expression = Key(table_pk).eq(type_pk(pk))
-    if sk: key_condition_expression &= Key(table_sk).begins_with(sk)
+    if sk:
+        key_condition_expression &= Key(table_sk).begins_with(sk)
     table = dynamodb.Table(table_name)
-    
-    response = table.query(
-        KeyConditionExpression=key_condition_expression
-    )
-    return response.get('Items', [])
-    
+
+    response = table.query(KeyConditionExpression=key_condition_expression)
+    return response.get("Items", [])
+
 
 @log_exceptions
-def dynamo_create(pk:Any, item:Dict[str, Any], table_name:TableName = DEFAULT_TABLE_NAME, sk:Optional[str]=None) -> bool:
+def dynamo_create(
+    pk: Any,
+    item: Dict[str, Any],
+    table_name: TableName = DEFAULT_TABLE_NAME,
+    sk: Optional[str] = None,
+) -> bool:
     key = _get_table_keys(table_name, pk, sk)
     item |= key
 
@@ -99,7 +123,12 @@ def dynamo_create(pk:Any, item:Dict[str, Any], table_name:TableName = DEFAULT_TA
 
 
 @log_exceptions
-def dynamo_update(pk:Any, update_values:Dict[str, Any], table_name:TableName = DEFAULT_TABLE_NAME, sk:Optional[str]=None) -> bool:
+def dynamo_update(
+    pk: Any,
+    update_values: Dict[str, Any],
+    table_name: TableName = DEFAULT_TABLE_NAME,
+    sk: Optional[str] = None,
+) -> bool:
     key = _get_table_keys(table_name, pk, sk)
 
     for k, v in update_values.items():
@@ -115,26 +144,32 @@ def dynamo_update(pk:Any, update_values:Dict[str, Any], table_name:TableName = D
         Key=key,
         UpdateExpression=update_expr,
         ExpressionAttributeNames=expr_attr_names,
-        ExpressionAttributeValues=expr_attr_values
+        ExpressionAttributeValues=expr_attr_values,
     )
-    return True  
+    return True
+
 
 @log_exceptions
-def dynamo_delete_starting_with(pk: Any, sk: str, table_name: TableName = DEFAULT_TABLE_NAME) -> bool:
-    table_sk = table_keys[table_name]['sk']
+def dynamo_delete_starting_with(
+    pk: Any, sk: str, table_name: TableName = DEFAULT_TABLE_NAME
+) -> bool:
+    table_sk = table_keys[table_name]["sk"]
     items = dynamo_query(pk=pk, sk=sk, table_name=table_name)
     if not items:
         return False
-    
+
     for item in items:
-        sk_value = item.get(table_sk, '')
+        sk_value = item.get(table_sk, "")
         if sk_value.startswith(sk):
             dynamo_delete(pk=pk, sk=sk_value, table_name=table_name)
-    
+
     return True
 
+
 @log_exceptions
-def dynamo_delete(pk:Any, table_name:TableName = DEFAULT_TABLE_NAME, sk:Optional[str] = None) -> bool:
+def dynamo_delete(
+    pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Optional[str] = None
+) -> bool:
     key = _get_table_keys(table_name, pk, sk)
     table = dynamodb.Table(table_name)
     table.delete_item(Key=key)
@@ -142,9 +177,11 @@ def dynamo_delete(pk:Any, table_name:TableName = DEFAULT_TABLE_NAME, sk:Optional
 
 
 @log_exceptions
-def dynamo_create_from_json(pk: Any, json_object: Dict[str, Any], table_name: TableName = DEFAULT_TABLE_NAME) -> bool:
+def dynamo_create_from_json(
+    pk: Any, json_object: Dict[str, Any], table_name: TableName = DEFAULT_TABLE_NAME
+) -> bool:
     for sk, content in json_object.items():
-        
+
         key = _get_table_keys(table_name, pk, sk)
         item = {**key, **content}
         for k, v in item.items():

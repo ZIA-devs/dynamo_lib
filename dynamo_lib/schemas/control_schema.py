@@ -24,3 +24,22 @@ class ControlSchema(BaseModel):
     status: ControlStatus = Field(
         default=ControlStatus.OKAY, alias="status", description="Company status"
     )
+
+    beta_tester: bool = Field(
+        default=False, alias="beta_tester", description="Is the company a beta tester?"
+    )
+
+    has_send_off: bool = Field(
+        default=False,
+        alias="has_send_off",
+        description="Does the company have send-off feature?",
+    )
+
+    is_evolution: bool = Field(
+        default=False, alias="is_evolution", description="Is using the evolution api?"
+    )
+
+    is_uazapi: bool = Field(
+        default=False, alias="is_uazapi", description="Is using the uazapi api?"
+    )
+    session_id: str = Field(default="0", alias="session_id", description="Session ID")

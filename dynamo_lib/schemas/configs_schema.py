@@ -1,6 +1,6 @@
 from ..core.enums import EmpresaPlan, EmpresaTipo
 from pydantic import BaseModel, Field, field_validator
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 import json
 
 
@@ -41,9 +41,27 @@ class ConfigsSchema(BaseModel):
         description="Timeout for taking in conversation in seconds",
     )
 
+    take_in_conv_start_warn: bool = Field(
+        default=True,
+        alias="take_in_conv_start_warn",
+        description="Warn when starting to take in conversation",
+    )
+
+    take_in_conv_end_warn: bool = Field(
+        default=True,
+        alias="take_in_conv_end_warn",
+        description="Warn when ending to take in conversation",
+    )
+
     token_asa: str = Field(default="", alias="token_asa", description="ASA token")
 
-    token_google_calendar: Dict[str, Any] = Field(
+    token_olx: str = Field(default="", alias="token_olx", description="OLX token")
+
+    token_uazapi: str = Field(
+        default="", alias="token_uazapi", description="Uazapi token"
+    )
+
+    token_google_calendar: Optional[Dict[str, Any]] = Field(
         default_factory=dict,
         alias="token_google_calendar",
         description="Google Calendar token",
@@ -67,6 +85,39 @@ class ConfigsSchema(BaseModel):
 
     beta_tester: bool = Field(
         default=False, alias="beta_tester", description="Is a beta tester"
+    )
+
+    has_send_off: bool = Field(
+        default=False, alias="has_send_off", description="Has send_off feature"
+    )
+
+    has_multiple_msg_warn: bool = Field(
+        default=True,
+        alias="has_multiple_msg_warn",
+        description="Warn when multiple messages are sent",
+    )
+
+    block_template_creation: bool = Field(
+        default=False,
+        alias="block_template_creation",
+        description="Block template creation",
+    )
+    hide_assistant_name: bool = Field(
+        default=False,
+        alias="hide_assistant_name",
+        description="Hide assistant name in conversations",
+    )
+    olx_integration: bool = Field(
+        default=False,
+        alias="olx_integration",
+        description="Enable OLX integration",
+    )
+    session_id: str = Field(
+        default="0", alias="session_id", description="Session ID for the traeffik"
+    )
+
+    is_active: bool = Field(
+        default=True, alias="is_active", description="Is the configuration active"
     )
 
     @field_validator("phone_id", mode="before")
