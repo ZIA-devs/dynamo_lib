@@ -7,4 +7,5 @@ table_keys: Dict[str, Dict[str, Any]] = {
     "Companies": {"pk": ("phone_id", int), "sk": "company_sk"},
     "Logs": {"pk": ("company_id", int), "sk": "logs_sk"},
     "Intents": {"pk": ("plan", int), "sk": "intent"},
+    "Checkout": {"pk": ("item_id", str), "sk": None},
 }
