@@ -3,8 +3,8 @@ from typing import List
 
 
 class CuponSchema(BaseModel):
-    code: str = Field(alias="cupon_code", description="Cupon code")
-    discount: float = Field(alias="cupon_discount", description="Discount percentage")
+    code: str = Field(alias="code", description="Cupon code")
+    discount: float = Field(alias="discount", description="Discount percentage")
 
 
 class CheckoutSchema(BaseModel):
