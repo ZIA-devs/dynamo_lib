@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field
-from typing import List
+from pydantic import BaseModel, Field, field_validator
+from typing import Dict, List
 
 
 class CouponSchema(BaseModel):
@@ -14,8 +14,16 @@ class CheckoutSchema(BaseModel):
     description: str = Field(
         default="", alias="description", description="Description of the item"
     )
-    coupons: List[CouponSchema] = Field(
+    coupons: Dict[str, CouponSchema] = Field(
         default=[],
         alias="coupons",
         description="List of coupons associated with the item",
     )
+
+    @field_validator("coupons", mode="before")
+    def validate_coupons(cls, value: List | None) -> Dict[str, CouponSchema]:
+        if value is None:
+            return {}
+        if isinstance(value, list):
+            return {coupon["code"]: CouponSchema(**coupon) for coupon in value}
+        return value
