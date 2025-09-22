@@ -21,6 +21,7 @@ class UserPermissions(int, Enum):
 
 
 class ClientStatus(int, Enum):
+    BLOCKED = -1
     ON_BOT = 0
     ON_QUEUE = 1
     WITH_SECTOR = 2
