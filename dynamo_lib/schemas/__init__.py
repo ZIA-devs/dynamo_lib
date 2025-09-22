@@ -19,6 +19,7 @@ from .send_off_schema import SendOffSchema
 from .tag_schema import TagSchema
 from .products_schema import ProductsSchema
 from .products_olx_schema import ProductsOlxSchema
+from .checkout import CheckoutSchema
 
 __all__ = [
     "AssistantSchema",
@@ -41,4 +42,5 @@ __all__ = [
     "TagSchema",
     "ProductsSchema",
     "ProductsOlxSchema",
+    "CheckoutSchema",
 ]
