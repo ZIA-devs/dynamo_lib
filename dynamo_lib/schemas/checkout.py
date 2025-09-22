@@ -2,7 +2,7 @@ from pydantic import BaseModel, Field
 from typing import List
 
 
-class CuponSchema(BaseModel):
+class CouponSchema(BaseModel):
     code: str = Field(alias="code", description="Cupon code")
     discount: float = Field(alias="discount", description="Discount percentage")
 
@@ -14,8 +14,8 @@ class CheckoutSchema(BaseModel):
     description: str = Field(
         default="", alias="description", description="Description of the item"
     )
-    cupons: List[CuponSchema] = Field(
+    coupons: List[CouponSchema] = Field(
         default=[],
-        alias="cupons",
-        description="List of cupons associated with the item",
+        alias="coupons",
+        description="List of coupons associated with the item",
     )
