@@ -9,13 +9,13 @@ class CuponSchema(BaseModel):
 
 class CheckoutSchema(BaseModel):
     id: str = Field(alias="item_id", description="ID of the item")
-    name: str = Field(alias="item_name", description="Name of the item")
-    price: float = Field(alias="item_price", description="Price of the item")
+    name: str = Field(alias="name", description="Name of the item")
+    price: float = Field(alias="price", description="Price of the item")
     description: str = Field(
-        default="", alias="item_description", description="Description of the item"
+        default="", alias="description", description="Description of the item"
     )
     cupons: List[CuponSchema] = Field(
         default=[],
-        alias="item_cupons",
+        alias="cupons",
         description="List of cupons associated with the item",
     )
