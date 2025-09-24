@@ -20,27 +20,3 @@ from .tag_schema import TagSchema
 from .products_schema import ProductsSchema
 from .products_olx_schema import ProductsOlxSchema
 from .checkout import CheckoutSchema
-
-__all__ = [
-    "AssistantSchema",
-    "ClientSchema",
-    "CompanyShiftSchema",
-    "ConfigsSchema",
-    "ControlSchema",
-    "EmployeeSchema",
-    "FaqSchema",
-    "FormSchema",
-    "IntentSchema",
-    "LogsSchema",
-    "MainContactSchema",
-    "QueueSchema",
-    "ReengagementSchema",
-    "SectorSchema",
-    "ServiceSchema",
-    "UserSchema",
-    "SendOffSchema",
-    "TagSchema",
-    "ProductsSchema",
-    "ProductsOlxSchema",
-    "CheckoutSchema",
-]

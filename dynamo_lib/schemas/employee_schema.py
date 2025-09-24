@@ -6,24 +6,12 @@ import json
 
 class EmployeeSchema(CompanyShiftSchema):
     _update_intervals = False
-
     token_google_calendar: Optional[Dict[str, Any]] = Field(
-        default_factory=dict,
-        alias="token_google_calendar",
-        description="Calendar token for the employee",
+        default_factory=dict, alias="token_google_calendar"
     )
-
-    id: int = Field(default=0, alias="employee_id", description="ID of the employee")
-
-    name: str = Field(
-        default="", alias="employee_name", description="Name of the employee"
-    )
-
-    services: list[int] = Field(
-        default_factory=list,
-        alias="employee_services",
-        description="List of service IDs offered by the employee",
-    )
+    id: int = Field(default=0, alias="employee_id")
+    name: str = Field(default="", alias="employee_name")
+    services: list[int] = Field(default_factory=list, alias="employee_services")
 
     @field_validator("token_google_calendar", mode="before")
     @classmethod

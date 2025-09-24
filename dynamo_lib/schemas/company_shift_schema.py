@@ -5,59 +5,25 @@ from typing import Dict, Optional, Any, Dict
 class CompanyShiftSchema(BaseModel):
     _update_intervals: bool = True
 
-    morning: bool = Field(
-        default=False,
-        alias=f"morning",
-        description="Whether the company has a morning shift",
-    )
-
+    morning: bool = Field(default=False, alias=f"morning")
     start_morning: Dict[str, str] = Field(
-        default_factory=dict,
-        alias=f"shift_start_morning",
-        description="Start time of the morning shift",
+        default_factory=dict, alias=f"shift_start_morning"
     )
-
     end_morning: Dict[str, str] = Field(
-        default_factory=dict,
-        alias=f"shift_end_morning",
-        description="End time of the morning shift",
+        default_factory=dict, alias=f"shift_end_morning"
     )
-
-    afternoon: bool = Field(
-        default=False,
-        alias=f"afternoon",
-        description="Whether the company has an afternoon shift",
-    )
-
+    afternoon: bool = Field(default=False, alias=f"afternoon")
     start_afternoon: Dict[str, str] = Field(
-        default_factory=dict,
-        alias=f"shift_start_afternoon",
-        description="Start time of the afternoon shift",
+        default_factory=dict, alias=f"shift_start_afternoon"
     )
-
     end_afternoon: Dict[str, str] = Field(
-        default_factory=dict,
-        alias=f"shift_end_afternoon",
-        description="End time of the afternoon shift",
+        default_factory=dict, alias=f"shift_end_afternoon"
     )
-
-    night: bool = Field(
-        default=False,
-        alias=f"night",
-        description="Whether the company has a night shift",
-    )
-
+    night: bool = Field(default=False, alias=f"night")
     start_night: Dict[str, str] = Field(
-        default_factory=dict,
-        alias=f"shift_start_night",
-        description="Start time of the night shift",
+        default_factory=dict, alias=f"shift_start_night"
     )
-
-    end_night: Dict[str, str] = Field(
-        default_factory=dict,
-        alias=f"shift_end_night",
-        description="End time of the night shift",
-    )
+    end_night: Dict[str, str] = Field(default_factory=dict, alias=f"shift_end_night")
 
     def model_post_init(self, __context: Any) -> None:
         self.process_intervals()

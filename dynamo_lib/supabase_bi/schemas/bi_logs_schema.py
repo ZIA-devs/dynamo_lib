@@ -4,37 +4,15 @@ from typing import Optional
 
 
 class BiLogsSchema(BaseModel):
-    id: int = Field(
-        default=0, alias="id", description="Unique identifier for the log entry"
-    )
-    phone_id: int = Field(
-        ...,
-        alias="phone_id",
-        description="Phone ID associated with the log entry",
-    )
-    client_id: str = Field(..., alias="client_id", description="Client identifier")
-    sender: str = Field(..., alias="sender", description="Sender of the log entry")
-    appointed: bool = Field(
-        ...,
-        alias="appointed",
-        description="Indicates if the appointment was made",
-    )
-    canceled: bool = Field(
-        ...,
-        alias="canceled",
-        description="Indicates if the appointment was canceled",
-    )
-    created_at: str = Field(
-        ...,
-        alias="created_at",
-        description="Timestamp of when the log entry was created",
-    )
-    tokens: Optional[int] = Field(
-        None, alias="tokens", description="Number of tokens used in the log entry"
-    )
-    origin: Optional[str] = Field(
-        None, alias="origin", description="Origin of the message in the log entry"
-    )
+    id: int = Field(default=0, alias="id")
+    phone_id: int = Field(..., alias="phone_id")
+    client_id: str = Field(..., alias="client_id")
+    sender: str = Field(..., alias="sender")
+    appointed: bool = Field(..., alias="appointed")
+    canceled: bool = Field(..., alias="canceled")
+    created_at: str = Field(..., alias="created_at")
+    tokens: Optional[int] = Field(None, alias="tokens")
+    origin: Optional[str] = Field(None, alias="origin")
 
     @field_validator("origin", mode="before")
     def validate_origin(cls, value):
@@ -54,35 +32,17 @@ class BiLogsSchema(BaseModel):
 
 
 class BiLogsOutputSchema(BaseModel):
-    phone_id: Optional[int] = Field(None, alias="phone_id", description="Phone ID")
-    is_total: bool = Field(
-        False, alias="is_total", description="Indicates if the entry is a total summary"
-    )
-    day: Optional[str] = Field(None, alias="day", description="Date of the log entry")
-    total: int = Field(..., alias="total", description="Total number of log entries")
-    appointed_count: int = Field(
-        ..., alias="appointed_count", description="Count of appointed logs"
-    )
-    canceled_count: int = Field(
-        ..., alias="canceled_count", description="Count of canceled logs"
-    )
-    user_count: int = Field(..., alias="user_count", description="Count users msg")
-    assistant_count: int = Field(
-        ..., alias="assistant_count", description="Count of assistants msg"
-    )
-    clients_count: int = Field(
-        ..., alias="clients_count", description="Count of unique clients in logs"
-    )
-    tokens: Optional[float] = Field(
-        None, alias="tokens", description="Number of tokens used in the log entry"
-    )
-    meta_wpp: int = Field(
-        0, alias="meta_wpp", description="Count of messages from Meta WhatsApp"
-    )
-    evo_wpp: int = Field(
-        0, alias="evo_wpp", description="Count of messages from Evo WhatsApp"
-    )
-    uazapi_wpp: int = Field(
-        0, alias="uazapi_wpp", description="Count of messages from UAZAPI WhatsApp"
-    )
-    olx: int = Field(0, alias="olx", description="Count of messages from OLX")
+    phone_id: Optional[int] = Field(None, alias="phone_id")
+    is_total: bool = Field(False, alias="is_total")
+    day: Optional[str] = Field(None, alias="day")
+    total: int = Field(..., alias="total")
+    appointed_count: int = Field(..., alias="appointed_count")
+    canceled_count: int = Field(..., alias="canceled_count")
+    user_count: int = Field(..., alias="user_count")
+    assistant_count: int = Field(..., alias="assistant_count")
+    clients_count: int = Field(..., alias="clients_count")
+    tokens: Optional[float] = Field(None, alias="tokens")
+    meta_wpp: int = Field(0, alias="meta_wpp")
+    evo_wpp: int = Field(0, alias="evo_wpp")
+    uazapi_wpp: int = Field(0, alias="uazapi_wpp")
+    olx: int = Field(0, alias="olx")

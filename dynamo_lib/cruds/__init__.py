@@ -19,27 +19,3 @@ from .tag_crud import TagCrud
 from .products_crud import ProductsCrud
 from .products_olx_crud import ProductsOlxCrud
 from .checkout import CheckoutCrud
-
-__all__ = [
-    "AssistantCrud",
-    "ClientCrud",
-    "CompanyShiftCrud",
-    "ConfigsCrud",
-    "ControlCrud",
-    "EmployeeCrud",
-    "FaqCrud",
-    "FormsCrud",
-    "IntentCrud",
-    "LogsCrud",
-    "MainContactCrud",
-    "QueueCrud",
-    "ReengagementCrud",
-    "SectorCrud",
-    "ServicesCrud",
-    "UsersCrud",
-    "SendOffCrud",
-    "TagCrud",
-    "ProductsCrud",
-    "ProductsOlxCrud",
-    "CheckoutCrud",
-]
