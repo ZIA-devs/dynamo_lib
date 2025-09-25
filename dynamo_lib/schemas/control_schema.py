@@ -14,3 +14,4 @@ class ControlSchema(BaseModel):
     is_evolution: bool = Field(default=False, alias="is_evolution")
     is_uazapi: bool = Field(default=False, alias="is_uazapi")
     session_id: str = Field(default="0", alias="session_id")
+    has_olx: bool = Field(default=False, alias="has_olx")
