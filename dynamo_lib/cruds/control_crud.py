@@ -15,6 +15,7 @@ class ControlCrud(BaseCrud[ControlSchema]):
         token_openai: str,
         employee_limit: int,
         is_uazapi: bool = True,
+        has_olx: bool = False,
     ) -> ControlSchema:
 
         new_control = {
@@ -23,5 +24,6 @@ class ControlCrud(BaseCrud[ControlSchema]):
             "employee_limit": employee_limit,
             "status": ControlStatus.NEED_META_LOGIN,
             "is_uazapi": is_uazapi,
+            "has_olx": has_olx,
         }
         return super().add(pk=company_identification, sk="", data=new_control)
