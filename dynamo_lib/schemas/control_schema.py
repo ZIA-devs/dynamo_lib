@@ -1,4 +1,5 @@
 from ..core.enums import ControlStatus, EmpresaPlan
+from ..core.enums import EmpresaPlan, EmpresaTipo
 from pydantic import BaseModel, Field
 
 
@@ -15,3 +16,6 @@ class ControlSchema(BaseModel):
     is_uazapi: bool = Field(default=False, alias="is_uazapi")
     session_id: str = Field(default="0", alias="session_id")
     has_olx: bool = Field(default=False, alias="has_olx")
+    business_type: EmpresaTipo = Field(
+        default=EmpresaTipo.PADRAO, alias="business_type"
+    )
