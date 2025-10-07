@@ -1,4 +1,4 @@
-from ..core.enums import EmpresaPlan, ControlStatus
+from ..core.enums import EmpresaPlan, ControlStatus, EmpresaTipo
 from ..schemas import ControlSchema
 from ._base_crud import BaseCrud
 
@@ -16,6 +16,7 @@ class ControlCrud(BaseCrud[ControlSchema]):
         employee_limit: int,
         is_uazapi: bool = True,
         has_olx: bool = False,
+        business_type: EmpresaTipo = EmpresaTipo.PADRAO,
     ) -> ControlSchema:
 
         new_control = {
@@ -25,5 +26,6 @@ class ControlCrud(BaseCrud[ControlSchema]):
             "status": ControlStatus.NEED_META_LOGIN,
             "is_uazapi": is_uazapi,
             "has_olx": has_olx,
+            "business_type": business_type,
         }
         return super().add(pk=company_identification, sk="", data=new_control)
