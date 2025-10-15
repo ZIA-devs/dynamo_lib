@@ -1,6 +1,6 @@
 from ..core.enums import EmpresaPlan, EmpresaTipo
 from pydantic import BaseModel, Field, field_validator
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, List
 import json
 
 
@@ -38,6 +38,7 @@ class ConfigsSchema(BaseModel):
     olx_integration: bool = Field(default=False, alias="olx_integration")
     session_id: str = Field(default="0", alias="session_id")
     is_active: bool = Field(default=True, alias="is_active")
+    test_number: List[str] = Field(default_factory=list, alias="test_number")
 
     @field_validator("phone_id", mode="before")
     @classmethod
