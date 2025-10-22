@@ -123,7 +123,8 @@ class LogsCrud(BaseCrud[LogsSchema]):
 
             if sender == "user":
                 client = ClientCrud.get(company_config.phone_id, client_phone)
-
+                # if client.phone not in company_config.test_numbers:
+                #     something on supabase to flag to count tokens
                 update = {
                     "msg_count": client.msg_count + 1,
                     "msg_count_wpp": (
