@@ -91,6 +91,9 @@ def dynamo_get(
 def dynamo_query(
     pk: Any, table_name: TableName = DEFAULT_TABLE_NAME, sk: Optional[str] = None
 ) -> list[Dict[str, Any]]:
+    items = []
+    last_evaluated_key = None
+
     table_pk, type_pk = table_keys[table_name]["pk"]
     table_sk = table_keys[table_name]["sk"]
 
@@ -99,8 +102,20 @@ def dynamo_query(
         key_condition_expression &= Key(table_sk).begins_with(sk)
     table = dynamodb.Table(table_name)
 
-    response = table.query(KeyConditionExpression=key_condition_expression)
-    return response.get("Items", [])
+    while True:
+        if last_evaluated_key:
+            response = table.query(
+                KeyConditionExpression=key_condition_expression,
+                ExclusiveStartKey=last_evaluated_key,
+            )
+        else:
+            response = table.query(KeyConditionExpression=key_condition_expression)
+        items.extend(response.get("Items", []))
+        last_evaluated_key = response.get("LastEvaluatedKey")
+        if not last_evaluated_key:
+            break
+
+    return items
 
 
 @log_exceptions
