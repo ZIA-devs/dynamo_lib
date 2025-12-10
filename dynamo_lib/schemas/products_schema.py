@@ -15,3 +15,4 @@ class ProductsSchema(BaseModel):
     images: List[ProductsImagesSchema] = Field(
         default_factory=List, alias="product_images"
     )
+    audios: List[str] = Field(default_factory=List, alias="product_audios")
